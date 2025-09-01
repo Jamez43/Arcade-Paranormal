@@ -1,0 +1,106 @@
+# =============== #
+# Unity Generated #
+# =============== #
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+sysinfo.txt
+
+# ============ #
+# Unity Cache  #
+# ============ #
+# Cache directories that should not be versioned.
+# Store asset pipeline and shader caches.
+[Ll]ibrary/Artifacts/
+[Ll]ibrary/ShaderCache/
+[Ll]ibrary/ScriptAssemblies/
+[Ll]ibrary/PackageCache/
+
+# ============= #
+# Crash Reports #
+# ============= #
+*.stacktrace
+*.crash
+*.error
+
+# =================== #
+# Build Artifacts     #
+# =================== #
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
+*.ipa
+*.app
+*.exe
+*.dll
+*.so
+*.dSYM
+
+# ========== #
+# IDE files  #
+# ========== #
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# =========== #
+# OS specific #
+# =========== #
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===================== #
+# Asset Store Tools etc #
+# ===================== #
+Assets/AssetStoreTools*
+
+# ============= #
+# Addressables  #
+# ============= #
+/ServerData/
+/LocalCache/
+
+# =================== #
+# Rider / JetBrains   #
+# =================== #
+*.DotSettings.user
+
+# =============== #
+# Git LFS patterns #
+# =============== #
+# Large binary files tracked via Git LFS (recommended)
+*.psd
+*.png
+*.jpg
+*.jpeg
+*.tga
+*.tiff
+*.gif
+*.bmp
+*.wav
+*.mp3
+*.ogg
+*.mp4
+*.mov
+*.avi
+*.fbx
+*.blend
+*.zip
+*.unitypackage
