@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyFollow : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private float speed = 1f;
+    [SerializeField] private EnemyDefaultStats stats;
     private Rigidbody2D rb;
 
     private void Start()
@@ -16,7 +16,7 @@ public class EnemyFollow : MonoBehaviour
         if (player != null)
         {
             Vector2 direction = (player.position - transform.position).normalized;
-            transform.position += (Vector3)direction * speed * Time.deltaTime;
+            transform.position += (Vector3)direction * stats.speed * Time.deltaTime;
         }
     }
 }

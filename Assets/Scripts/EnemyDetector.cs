@@ -5,9 +5,13 @@ public class EnemyDetector : MonoBehaviour
     [SerializeField] private float radius = 1.5f;
     [SerializeField] private float arcAngle = 75f;        // half-angle of cone
     [SerializeField] private LayerMask enemyLayer;        // assign Enemy layer for efficiency
+    [SerializeField] private PlayerInGameStats_Default playerStats;
 
     private Transform center;
     private IndicatorController indicator;
+
+    private float elapsedTime;
+
 
     private void Awake()
     {
@@ -20,12 +24,17 @@ public class EnemyDetector : MonoBehaviour
 
     private void Update()
     {
+        elapsedTime += Time.deltaTime;
         if (indicator == null || center == null) return;
 
         // Indicator’s forward direction (up axis after rotation)
         Vector2 forwardDir = indicator.transform.up;
 
-        DetectEnemies(center.position, forwardDir);
+        if (elapsedTime >= playerStats.attackDelay)
+        {
+            elapsedTime = 0f;
+            DetectEnemies(center.position, forwardDir);
+        }
     }
 
     private void DetectEnemies(Vector3 center, Vector2 forwardDir)
@@ -41,9 +50,34 @@ public class EnemyDetector : MonoBehaviour
 
                 if (angleToEnemy <= arcAngle)
                 {
-                    Debug.Log("Enemy in arc: " + hit.name);
+                    dealAttack(hit.GetComponent<EnemyStats>());
                 }
             }
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (indicator != null)
+        {
+            indicator.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (indicator != null)
+        {
+            indicator.gameObject.SetActive(true);
+        }
+    }
+
+    private void dealAttack(EnemyStats enemyStats)
+    {
+        if (enemyStats != null)
+        {
+            Debug.Log("Dealing " + playerStats.damage + " damage to " + enemyStats.name);
+            enemyStats.applyDamage(playerStats.damage);
         }
     }
 

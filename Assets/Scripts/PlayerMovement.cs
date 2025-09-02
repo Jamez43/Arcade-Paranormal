@@ -1,15 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
+    [SerializeField] private PlayerInGameStats_Default stats;
 
     private InputAction moveAction;
 
     private Vector2 moveAmount;
-    [SerializeField] private float movementSpeed = 3f;
-    private float baseSpeed;
+    private float currentSpeed;
 
     private Collider2D playerCollider;
 
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         playerCollider = GetComponent<Collider2D>();
-        baseSpeed = movementSpeed;
+        currentSpeed = stats.speed;
     }
 
     private void Update()
@@ -35,11 +36,11 @@ public class PlayerMovement : MonoBehaviour
         moveAmount = moveAction.ReadValue<Vector2>();
         if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
         {
-            movementSpeed = baseSpeed * 0.5f;
+            currentSpeed = stats.speed * 0.5f;
         }
         else
         {
-            movementSpeed = baseSpeed;
+            currentSpeed = stats.speed;
         }
     }
 
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        transform.position += new Vector3(moveAmount.x, moveAmount.y, 0) * movementSpeed * Time.fixedDeltaTime;
+        transform.position += new Vector3(moveAmount.x, moveAmount.y, 0) * currentSpeed * Time.fixedDeltaTime;
     }
 
 }
