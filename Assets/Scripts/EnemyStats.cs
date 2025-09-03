@@ -22,12 +22,14 @@ public class EnemyStats : MonoBehaviour
         currentHealth = stats.maxHealth;
     }
 
-    public void applyDamage(float damageAmount)
+    public void ApplyDamage(float damageAmount)
     {
         float damageAfterDefense = damageAmount * (1 - stats.defense);
         if (damageAfterDefense > 0)
         {
             currentHealth -= damageAfterDefense;
+            HealthBar healthBar = GetComponentInChildren<HealthBar>(includeInactive: true);
+            healthBar.UpdateHealthBar(currentHealth, stats.maxHealth);
         }
     }
 

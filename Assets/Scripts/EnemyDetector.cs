@@ -77,7 +77,7 @@ public class EnemyDetector : MonoBehaviour
         if (enemyStats != null)
         {
             Debug.Log("Dealing " + playerStats.damage + " damage to " + enemyStats.name);
-            enemyStats.applyDamage(playerStats.damage);
+            enemyStats.ApplyDamage(playerStats.damage);
         }
     }
 
