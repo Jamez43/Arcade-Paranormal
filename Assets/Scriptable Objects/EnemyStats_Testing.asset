@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: New Player In Game Stats_Default
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInGameStats_Default
-  maxHealth: 100
+  m_Name: EnemyStats_Testing
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats_Testing
+  maxHealth: 10
   damage: 5
-  speed: 3
-  attackDelay: 1
+  speed: 1
+  attackDelay: 0
   defense: 0
   attackType: Melee

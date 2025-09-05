@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
-    [SerializeField] private PlayerInGameStats_Default stats;
+    [SerializeField] private PlayerStats stats;
 
     private InputAction moveAction;
 
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         playerCollider = GetComponent<Collider2D>();
-        currentSpeed = stats.speed;
+        currentSpeed = stats.Speed;
     }
 
     private void Update()
@@ -36,11 +36,11 @@ public class PlayerMovement : MonoBehaviour
         moveAmount = moveAction.ReadValue<Vector2>();
         if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
         {
-            currentSpeed = stats.speed * 0.5f;
+            currentSpeed = stats.Speed * 0.5f;
         }
         else
         {
-            currentSpeed = stats.speed;
+            currentSpeed = stats.Speed;
         }
     }
 

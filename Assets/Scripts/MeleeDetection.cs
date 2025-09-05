@@ -5,7 +5,7 @@ public class EnemyDetector : MonoBehaviour
     [SerializeField] private float radius = 1.5f;
     [SerializeField] private float arcAngle = 75f;        // half-angle of cone
     [SerializeField] private LayerMask enemyLayer;        // assign Enemy layer for efficiency
-    [SerializeField] private PlayerInGameStats_Default playerStats;
+    [SerializeField] private PlayerStats playerStats;
 
     private Transform center;
     private IndicatorController indicator;
@@ -30,7 +30,7 @@ public class EnemyDetector : MonoBehaviour
         // Indicator’s forward direction (up axis after rotation)
         Vector2 forwardDir = indicator.transform.up;
 
-        if (elapsedTime >= playerStats.attackDelay)
+        if (elapsedTime >= playerStats.AttackDelay)
         {
             elapsedTime = 0f;
             DetectEnemies(center.position, forwardDir);
@@ -50,7 +50,7 @@ public class EnemyDetector : MonoBehaviour
 
                 if (angleToEnemy <= arcAngle)
                 {
-                    dealAttack(hit.GetComponent<EnemyStats>());
+                    dealAttack(hit.GetComponent<EnemyController>());
                 }
             }
         }
@@ -72,12 +72,12 @@ public class EnemyDetector : MonoBehaviour
         }
     }
 
-    private void dealAttack(EnemyStats enemyStats)
+    private void dealAttack(EnemyController enemyController)
     {
-        if (enemyStats != null)
+        if (enemyController != null)
         {
-            Debug.Log("Dealing " + playerStats.damage + " damage to " + enemyStats.name);
-            enemyStats.ApplyDamage(playerStats.damage);
+            Debug.Log("Dealing " + playerStats.Damage + " damage to " + enemyController.name);
+            enemyController.ApplyDamage(playerStats.Damage);
         }
     }
 
