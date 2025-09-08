@@ -79,7 +79,6 @@ public class EnemyDetector : MonoBehaviour
     {
         if (enemyController != null)
         {
-            Debug.Log("Dealing " + playerStats.Damage + " damage to " + enemyController.name);
             enemyController.ApplyDamage(playerStats.Damage);
         }
     }
