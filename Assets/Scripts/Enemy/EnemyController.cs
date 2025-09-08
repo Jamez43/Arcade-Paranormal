@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private EnemyStats stats;
+    [SerializeField] public EnemyStats stats;
     public float currentHealth { get; private set; }
     private HealthBar healthBar;
     private Collider2D enemyCollider;
+
+    private XPController XPController;
+
+    private void Awake()
+    {
+        healthBar = GetComponentInChildren<HealthBar>(includeInactive: true);
+        enemyCollider = GetComponent<Collider2D>();
+        XPController = FindFirstObjectByType<XPController>();
+    }
     private void OnEnable()
     {
         currentHealth = stats.MaxHealth;
-        healthBar = GetComponentInChildren<HealthBar>(includeInactive: true);
-        enemyCollider = GetComponent<Collider2D>();
         enemyCollider.enabled = true;
         healthBar.gameObject.SetActive(false);
     }
@@ -40,15 +47,25 @@ public class EnemyController : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Debug.Log("Enemy " + gameObject.name + " died.");
             gameObject.SetActive(false);
 
+            EnemySpawning enemySpawning = FindFirstObjectByType<EnemySpawning>();
+            if (enemySpawning != null)
+            {
+                enemySpawning.disabledEnemies.Add(gameObject);
+            }
 
-            //TODO: Change to pooling system
-            //Get disabled xp object from pool instead of instantiating new one
             GameObject xpPrefab = Resources.Load<GameObject>("XP");
-            Debug.Log("Instantiating XP prefab at " + transform.position);
-            Instantiate(xpPrefab, transform.position, Quaternion.identity);
+            if (XPController.disabledXP.Count == 0)
+            {
+                Instantiate(xpPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                GameObject xpInstance = XPController.disabledXP[0];
+                xpInstance.transform.position = transform.position;
+                xpInstance.SetActive(true);
+            }
         }
     }
 

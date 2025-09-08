@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
-    [SerializeField] private Transform player;
+    private Transform player;
     [SerializeField] private EnemyStats stats;
     private Rigidbody2D rb;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void FixedUpdate()

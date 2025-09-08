@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1274936771757382758}
   - component: {fileID: 4057354742926476235}
-  - component: {fileID: 5272533319953495537}
+  - component: {fileID: 8760663635707694448}
   - component: {fileID: 6830309909229116901}
   m_Layer: 0
   m_Name: XP
-  m_TagString: Untagged
+  m_TagString: XP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5272533319953495537
+--- !u!114 &8760663635707694448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,9 +101,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1851481682192211512}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c7040eaa206e49469c2e22f94c120c2, type: 3}
+  m_Script: {fileID: 11500000, guid: b74362a23c6b943e58c99f6e07aaa1f5, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::XPCollisions
 --- !u!58 &6830309909229116901
 CircleCollider2D:
   m_ObjectHideFlags: 0

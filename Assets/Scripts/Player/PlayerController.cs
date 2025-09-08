@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Debug.Log("Enemy " + gameObject.name + " died.");
             gameObject.SetActive(false);
         }
     }

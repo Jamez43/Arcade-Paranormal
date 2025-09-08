@@ -1,26 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class XPController : MonoBehaviour
 {
+    public List<GameObject> disabledXP = new List<GameObject>();
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void Start()
     {
-        if (collider.CompareTag("Player"))
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject obj in allObjects)
         {
-            // Grant XP for defeating the enemy
-            float xpAmount = Random.Range(5, 10);
-            GrantXP(xpAmount);
-            Debug.Log("Granted " + xpAmount + " XP to player.");
-            gameObject.SetActive(false);
-        }
-    }
-
-    private void GrantXP(float amount)
-    {
-        PlayerController player = FindFirstObjectByType<PlayerController>();
-        if (player != null)
-        {
-            player.AddXP(amount);
+            if (obj.CompareTag("XP"))
+            {
+                disabledXP.Add(obj);
+            }
         }
     }
 }
