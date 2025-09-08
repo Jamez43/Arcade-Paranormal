@@ -6,6 +6,7 @@ public class EnemyDetector : MonoBehaviour
     [SerializeField] private float arcAngle = 75f;        // half-angle of cone
     [SerializeField] private LayerMask enemyLayer;        // assign Enemy layer for efficiency
     [SerializeField] private PlayerStats playerStats;
+    [SerializeField] private CooldownBar cooldownBar;
 
     private Transform center;
     private IndicatorController indicator;
@@ -20,11 +21,13 @@ public class EnemyDetector : MonoBehaviour
         {
             center = indicator.transform.parent; // usually the player
         }
+        cooldownBar.UpdateCooldownBar(playerStats.AttackDelay, playerStats.AttackDelay);
     }
 
     private void Update()
     {
         elapsedTime += Time.deltaTime;
+        cooldownBar.UpdateCooldownBar(elapsedTime, playerStats.AttackDelay);
         if (indicator == null || center == null) return;
 
         // Indicator’s forward direction (up axis after rotation)

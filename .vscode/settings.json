@@ -66,5 +66,8 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Arcade-Paranormal.sln"
+    "dotnet.defaultSolution": "Arcade-Paranormal.sln",
+    "cSpell.words": [
+        "cooldown"
+    ]
 }

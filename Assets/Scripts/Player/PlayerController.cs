@@ -1,19 +1,18 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private EnemyStats stats;
-    public float currentHealth { get; private set; }
+    [SerializeField] private PlayerStats stats;
+    private float currentHealth;
     private HealthBar healthBar;
-    private Collider2D enemyCollider;
+
+
     private void OnEnable()
     {
-        currentHealth = stats.MaxHealth;
         healthBar = GetComponentInChildren<HealthBar>(includeInactive: true);
-        enemyCollider = GetComponent<Collider2D>();
-        enemyCollider.enabled = true;
-        healthBar.gameObject.SetActive(false);
+        currentHealth = stats.MaxHealth;
     }
+
 
     public void ApplyDamage(float damageAmount)
     {
@@ -24,11 +23,6 @@ public class EnemyController : MonoBehaviour
             healthBar.gameObject.SetActive(true);
             healthBar.UpdateHealthBar(currentHealth, stats.MaxHealth);
         }
-    }
-
-    private void OnDisable()
-    {
-        enemyCollider.enabled = false;
     }
 
     private void Update()
@@ -42,18 +36,6 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("Enemy " + gameObject.name + " died.");
             gameObject.SetActive(false);
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            PlayerController player = collision.collider.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                player.ApplyDamage(stats.Damage);
-            }
         }
     }
 }
