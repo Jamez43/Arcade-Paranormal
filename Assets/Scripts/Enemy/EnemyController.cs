@@ -42,6 +42,13 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("Enemy " + gameObject.name + " died.");
             gameObject.SetActive(false);
+
+
+            //TODO: Change to pooling system
+            //Get disabled xp object from pool instead of instantiating new one
+            GameObject xpPrefab = Resources.Load<GameObject>("XP");
+            Debug.Log("Instantiating XP prefab at " + transform.position);
+            Instantiate(xpPrefab, transform.position, Quaternion.identity);
         }
     }
 
