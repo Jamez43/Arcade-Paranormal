@@ -29,7 +29,6 @@ public class EnemyDetector : MonoBehaviour
     {
         elapsedTime += Time.deltaTime;
         cooldownBar.UpdateCooldownBar(elapsedTime, playerStats.AttackDelay);
-        if (indicator == null || center == null) return;
 
         // Indicator’s forward direction (up axis after rotation)
         Vector2 forwardDir = indicator.transform.up;

@@ -68,6 +68,7 @@
     },
     "dotnet.defaultSolution": "Arcade-Paranormal.sln",
     "cSpell.words": [
-        "cooldown"
+        "cooldown",
+        "Rigidbody"
     ]
 }

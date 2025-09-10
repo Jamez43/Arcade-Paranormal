@@ -8,7 +8,7 @@ public class EnemySpawning : MonoBehaviour
     public List<GameObject> disabledEnemies = new List<GameObject>();
     private int wallet = 10;
     private Transform playerTransform;
-    [SerializeField] private float spawnRadius = 10f;
+    [SerializeField] private float spawnRadius = 8f;
     private float waveInterval;
     [SerializeField] private float waveIntervalMax = 15f;
     [SerializeField] private float waveIntervalMin = 5f;
