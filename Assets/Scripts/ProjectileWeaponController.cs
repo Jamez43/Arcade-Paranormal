@@ -1,21 +1,33 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Numerics;
 
 public class ProjectileWeaponController : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float spawnOffset = 0.5f; // distance in front of the shooter along aim direction
+    [Header("Aiming (like melee)")]
+    [SerializeField] private LayerMask enemyLayer;            // set to Enemy layer
+    [SerializeField] private float targetSearchRadius = 30f;  // how far to search
+    [SerializeField] private float arcAngle = 20f;            // cone half-angle (degrees)
     private CooldownBar cooldownBar;
     private float elapsedTime;
     public List<GameObject> disabledProjectiles = new List<GameObject>();
     public List<GameObject> activeProjectiles = new List<GameObject>();
+    // Aiming helpers
+    private IndicatorController indicator;
+    private Transform center;                                  // usually the player (indicator's parent)
+    private readonly Collider2D[] _overlapResults = new Collider2D[128];
 
     private void Awake()
     {
         cooldownBar = Object.FindAnyObjectByType<CooldownBar>();
         cooldownBar.UpdateCooldownBar(playerStats.AttackDelay, playerStats.AttackDelay);
+
+        // Find the aim indicator (same pattern as melee)
+        indicator = GetComponentInChildren<IndicatorController>();
+        center = indicator != null ? indicator.transform.parent : transform;
 
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         foreach (GameObject obj in allObjects)
@@ -54,8 +66,14 @@ public class ProjectileWeaponController : MonoBehaviour
             projectile = Instantiate(projectilePrefab);
         }
 
-        UnityEngine.Vector2 direction = GetClosestEnemyDirection();
-        projectile.transform.position = transform.position + 0.5f * UnityEngine.Vector3.right; // Offset to avoid immediate collision with player
+        // Aim like melee: pick nearest enemy in cone; else straight along indicator
+        UnityEngine.Vector2 direction = GetFireDirectionLikeMelee();
+        if (direction.sqrMagnitude < 0.0001f)
+        {
+            direction = (UnityEngine.Vector2)transform.up; // fallback to forward if direction == 0
+        }
+        // Spawn from the same origin used for aiming (indicator's parent if present)
+        projectile.transform.position = transform.position + (UnityEngine.Vector3)(direction.normalized * spawnOffset);
         projectile.transform.up = direction; // Align the projectile's up direction with the firing direction
 
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
@@ -67,38 +85,57 @@ public class ProjectileWeaponController : MonoBehaviour
         activeProjectiles.Add(projectile);
     }
 
-    private UnityEngine.Vector2 GetClosestEnemyDirection()
+    private UnityEngine.Vector2 GetFireDirectionLikeMelee()
     {
-        GameObject closestEnemy = null;
-        float closestDistance = Mathf.Infinity;
-        UnityEngine.Vector3 weaponPosition = transform.position;
+        // Forward direction comes from the indicator; fallback to this object's up
+        Vector2 forward = indicator.transform.up;
+        // Offset origin downward so cone starts at bottom of model
+        Vector3 origin = transform.position;
 
-        foreach (EnemyController enemy in FindObjectsByType<EnemyController>(FindObjectsSortMode.None))
+        // Query nearby enemies using physics for efficiency
+        var filter = new ContactFilter2D { useLayerMask = true };
+        filter.SetLayerMask(enemyLayer);
+        int count = Physics2D.OverlapCircle(origin, targetSearchRadius, filter, _overlapResults);
+
+        float shortestDistance = float.PositiveInfinity;
+        Transform best = null;
+
+        for (int i = 0; i < count; i++)
         {
-            UnityEngine.Vector3 enemyScreenPos = Camera.main.WorldToViewportPoint(enemy.transform.position);
-            bool onScreen = enemyScreenPos.z > 0 &&
-                            enemyScreenPos.x > 0 && enemyScreenPos.x < 1 &&
-                            enemyScreenPos.y > 0 && enemyScreenPos.y < 1;
-
-            if (onScreen)
+            var col = _overlapResults[i];
+            if (col == null) continue;
+            Transform transform;
+            //ensure you're using the parent transform
+            if (col.attachedRigidbody != null)
             {
-                float distance = UnityEngine.Vector3.Distance(weaponPosition, enemy.transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestEnemy = enemy.gameObject;
-                }
+                transform = col.attachedRigidbody.transform;
+            }
+            else
+            {
+                transform = col.transform;
+            }
+            if (!transform.gameObject.activeInHierarchy) continue;
+            if (!transform.CompareTag("Enemy")) continue;
+
+            Vector2 toEnemy = (Vector2)(transform.position - origin);
+            float angle = Vector2.Angle(forward, toEnemy);
+            if (angle > arcAngle) continue;
+
+            float distance = toEnemy.sqrMagnitude;
+            if (distance < shortestDistance)
+            {
+                shortestDistance = distance;
+                best = transform;
             }
         }
 
-        if (closestEnemy != null)
+        if (best != null)
         {
-            return (closestEnemy.transform.position - transform.position).normalized;
+            return ((Vector2)(best.position - origin)).normalized;
         }
-        else
-        {
-            return Random.insideUnitCircle.normalized;
-        }
+
+        // No enemy in cone: shoot straight along indicator
+        return forward.normalized;
     }
 
     private void RemoveOffScreenProjectiles()
@@ -121,24 +158,25 @@ public class ProjectileWeaponController : MonoBehaviour
         }
     }
 
-    /*
-        private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
+    {
+        // Visualize targeting radius and aim cone in Scene view
+        Transform c = center != null ? center : transform;
+        Vector3 centerPos = c.position;
+        Vector3 forward = indicator != null ? indicator.transform.up : transform.up;
+
+        // Cone
+        int segments = 40;
+        float angleStep = (arcAngle * 2f) / segments;
+        Vector3 prevPoint = centerPos + (Quaternion.AngleAxis(-arcAngle, Vector3.forward) * forward * targetSearchRadius);
+        Gizmos.color = Color.yellow;
+        for (int i = 1; i <= segments; i++)
         {
-            if (Camera.main == null) return;
-            float buffer = .5f; // Use your current buffer value
-
-            // Draw viewport boundary with buffer
-            UnityEngine.Vector3[] corners = new UnityEngine.Vector3[4];
-            corners[0] = Camera.main.ViewportToWorldPoint(new UnityEngine.Vector3(-buffer, -buffer, 10));
-            corners[1] = Camera.main.ViewportToWorldPoint(new UnityEngine.Vector3(1 + buffer, -buffer, 10));
-            corners[2] = Camera.main.ViewportToWorldPoint(new UnityEngine.Vector3(1 + buffer, 1 + buffer, 10));
-            corners[3] = Camera.main.ViewportToWorldPoint(new UnityEngine.Vector3(-buffer, 1 + buffer, 10));
-
-            Gizmos.color = Color.red;
-            for (int i = 0; i < 4; i++)
-            {
-                Gizmos.DrawLine(corners[i], corners[(i + 1) % 4]);
-            }
+            float angle = -arcAngle + angleStep * i;
+            Vector3 nextPoint = centerPos + (Quaternion.AngleAxis(angle, Vector3.forward) * forward * targetSearchRadius);
+            Gizmos.DrawLine(centerPos, nextPoint);
+            Gizmos.DrawLine(prevPoint, nextPoint);
+            prevPoint = nextPoint;
         }
-        */
+    }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
 public class EnemySpawning : MonoBehaviour
@@ -13,10 +14,17 @@ public class EnemySpawning : MonoBehaviour
     [SerializeField] private float waveIntervalMax = 15f;
     [SerializeField] private float waveIntervalMin = 5f;
 
+    [Header("Spawn Bounds")]
+    [SerializeField] private Transform[] spawnBoundsMarkers = new Transform[4];
+    [SerializeField] private int spawnRetryAttempts = 8;
+
+    private float minX, maxX, minY, maxY;
+
     private List<string> enemyNames = new List<string>();
 
     private void Start()
     {
+        getSpawnBounds();
         GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
         foreach (GameObject obj in allObjects)
         {
@@ -86,7 +94,60 @@ public class EnemySpawning : MonoBehaviour
 
     private Vector3 GetRandomSpawnPosition()
     {
-        Vector2 randomDirection = Random.insideUnitCircle.normalized;
-        return playerTransform.position + (Vector3)(randomDirection * spawnRadius);
+        Vector3 candidate;
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+        float radius;
+        // Preferred behavior: pick a point on a circle around the player; if out of bounds, retry
+        // Generate a candidate on the circle (or slightly randomized ring)
+        for (int attempt = 0; attempt < Mathf.Max(1, spawnRetryAttempts); attempt++)
+        {
+            angle = Random.Range(0f, Mathf.PI * 2f);
+            // small jitter on radius to avoid perfect ring overlap
+            radius = spawnRadius * Random.Range(0.8f, 1.2f);
+            candidate = playerTransform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius;
+
+            if (IsWithinBounds(candidate, minX, maxX, minY, maxY))
+            {
+                return candidate;
+            }
+        }
+
+        // If we failed all attempts and we have bounds, clamp to the nearest in-bounds point
+        candidate = playerTransform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * spawnRadius;
+        float clampedX = Mathf.Clamp(candidate.x, minX, maxX);
+        float clampedY = Mathf.Clamp(candidate.y, minY, maxY);
+        return new Vector3(clampedX, clampedY, 0f);
+    }
+
+    private static bool IsWithinBounds(Vector3 position, float minX, float maxX, float minY, float maxY)
+    {
+        return position.x >= minX && position.x <= maxX && position.y >= minY && position.y <= maxY;
+    }
+
+    private void getSpawnBounds()
+    {
+        foreach (Transform marker in spawnBoundsMarkers)
+        {
+            if (marker == null) continue;
+            if (marker.position.x < minX) minX = marker.position.x;
+            if (marker.position.x > maxX) maxX = marker.position.x;
+            if (marker.position.y < minY) minY = marker.position.y;
+            if (marker.position.y > maxY) maxY = marker.position.y;
+        }
+    }
+
+    // Visualize the spawn bounds in the Scene view
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.pink;
+        Vector3 a = new Vector3(minX, minY, 0f);
+        Vector3 b = new Vector3(maxX, minY, 0f);
+        Vector3 c = new Vector3(maxX, maxY, 0f);
+        Vector3 d = new Vector3(minX, maxY, 0f);
+
+        Gizmos.DrawLine(a, b);
+        Gizmos.DrawLine(b, c);
+        Gizmos.DrawLine(c, d);
+        Gizmos.DrawLine(d, a);
     }
 }
