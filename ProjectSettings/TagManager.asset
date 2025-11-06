@@ -6,8 +6,10 @@ TagManager:
   tags:
   - Enemy
   - XP
-  - Projectile
   - Obstacle
+  - Player Projectile
+  - Enemy Cabinet Projectile
+  - Projectile
   layers:
   - Default
   - TransparentFX

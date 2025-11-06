@@ -21,24 +21,35 @@ public class EnemySpawning : MonoBehaviour
     private float minX, maxX, minY, maxY;
 
     private List<string> enemyNames = new List<string>();
+    private Transform enemiesParent;
 
-    private void Start()
+    private void Awake()
     {
+        // One-time setup and cache references
         getSpawnBounds();
-        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-        foreach (GameObject obj in allObjects)
+
+        enemiesParent = GameObject.Find("Enemies").transform;
+        // Only pool inactive enemies already in the scene hierarchy
+        foreach (Transform child in enemiesParent)
         {
-            if (obj.CompareTag("Enemy"))
+            if (child != null && child.CompareTag("Enemy") && !child.gameObject.activeInHierarchy)
             {
-                disabledEnemies.Add(obj);
+                if (!disabledEnemies.Contains(child.gameObject))
+                    disabledEnemies.Add(child.gameObject);
             }
+
         }
-        // Load all enemy prefab names from Resources/Enemies
+
+        // Preload enemy prefab names for quick lookups
         enemyNames = Resources.LoadAll<GameObject>("Enemies")
             .Select(go => go.name)
             .ToList();
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    private void Start()
+    {
         SpawnEnemies();
         StartCoroutine(SpawnWave());
     }
@@ -69,9 +80,22 @@ public class EnemySpawning : MonoBehaviour
             if (affordableEnemies.Count == 0) break;
 
             // Spawn logic here
-            string enemyToSpawnName = affordableEnemies[Random.Range(0, affordableEnemies.Count)].name;
+            // Choose a prefab to spawn
+            GameObject prefabToSpawn = affordableEnemies[Random.Range(0, affordableEnemies.Count)];
+            string enemyToSpawnName = prefabToSpawn.name;
 
-            GameObject disabledEnemy = disabledEnemies.FirstOrDefault(e => e.name.Contains(enemyToSpawnName));
+            // Prefer matching by EnemyStats reference to avoid name suffix issues
+            EnemyController prefabEC = prefabToSpawn.GetComponent<EnemyController>();
+            GameObject disabledEnemy = disabledEnemies.FirstOrDefault(e =>
+            {
+                var ec = e != null ? e.GetComponent<EnemyController>() : null;
+                if (ec != null && ec.stats != null && prefabEC != null && prefabEC.stats != null)
+                {
+                    return ec.stats == prefabEC.stats; // match by ScriptableObject reference
+                }
+                // Fallback to sanitized name match
+                return SanitizeName(e.name) == enemyToSpawnName;
+            });
             GameObject enemyInstance;
 
             if (disabledEnemy != null)
@@ -83,8 +107,16 @@ public class EnemySpawning : MonoBehaviour
             }
             else
             {
-                GameObject enemyPrefab = Resources.Load<GameObject>("Enemies/" + enemyToSpawnName);
-                enemyInstance = Instantiate(enemyPrefab, GetRandomSpawnPosition(), Quaternion.identity);
+                GameObject enemyPrefab = prefabToSpawn; // already loaded
+                // Parent under Enemies container if available to keep hierarchy tidy
+                if (enemiesParent != null)
+                {
+                    enemyInstance = Instantiate(enemyPrefab, GetRandomSpawnPosition(), Quaternion.identity, enemiesParent);
+                }
+                else
+                {
+                    enemyInstance = Instantiate(enemyPrefab, GetRandomSpawnPosition(), Quaternion.identity);
+                }
             }
 
             wallet -= enemyInstance.GetComponent<EnemyController>().stats.Cost;
@@ -117,6 +149,12 @@ public class EnemySpawning : MonoBehaviour
         float clampedX = Mathf.Clamp(candidate.x, minX, maxX);
         float clampedY = Mathf.Clamp(candidate.y, minY, maxY);
         return new Vector3(clampedX, clampedY, 0f);
+    }
+
+    // Helper to compare pooled instances and prefabs by base name
+    private static string SanitizeName(string n)
+    {
+        return string.IsNullOrEmpty(n) ? string.Empty : n.Replace("(Clone)", string.Empty).Trim();
     }
 
     private static bool IsWithinBounds(Vector3 position, float minX, float maxX, float minY, float maxY)

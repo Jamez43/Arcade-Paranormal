@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5881988933923995009}
-  - component: {fileID: 2711085789604542965}
+  - component: {fileID: 4976084179290562568}
   - component: {fileID: 8978873759873635407}
   - component: {fileID: 6932608992927347499}
   - component: {fileID: 129690771651384617}
   m_Layer: 0
-  m_Name: Projectile
-  m_TagString: Projectile
+  m_Name: Enemy Cabinet Projectile
+  m_TagString: Enemy Cabinet Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,14 +28,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2829685668689774326}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9831302, w: 0.18290702}
-  m_LocalPosition: {x: 2.7546551, y: 0.7346014, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.9712215, w: -0.23817816}
+  m_LocalPosition: {x: -13.480555, y: 17.213165, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2711085789604542965
+--- !u!114 &4976084179290562568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +44,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2829685668689774326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 633d56970a9f3453f9fe514ac640f348, type: 3}
+  m_Script: {fileID: 11500000, guid: 018b1dd485e90f04986adbb2ac781538, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectileCollisions
-  playerStats: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
+  m_EditorClassIdentifier: Assembly-CSharp::CabinetProjectileCollisions
+  enemyStats: {fileID: 11400000, guid: afbe438e5a5775c46842cb8a9da937c9, type: 2}
 --- !u!212 &8978873759873635407
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0.6289654, b: 1, a: 1}
+  m_Color: {r: 0.6509434, g: 0.08904416, b: 0.13894293, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

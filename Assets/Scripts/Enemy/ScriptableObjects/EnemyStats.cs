@@ -7,6 +7,5 @@ public abstract class EnemyStats : ScriptableObject
     public abstract float Speed { get; }
     public abstract float AttackDelay { get; }
     public abstract float Defense { get; }
-    public abstract string AttackType { get; }
     public abstract int Cost { get; }
 }

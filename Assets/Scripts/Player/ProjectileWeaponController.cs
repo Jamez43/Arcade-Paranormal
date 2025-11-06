@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
-
 public class ProjectileWeaponController : MonoBehaviour
 {
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float spawnOffset = 0.5f; // distance in front of the shooter along aim direction
+    [SerializeField] private float spawnOffset = 0.8f; // distance in front of the shooter along aim direction
     [Header("Aiming (like melee)")]
     [SerializeField] private LayerMask enemyLayer;            // set to Enemy layer
     [SerializeField] private float targetSearchRadius = 30f;  // how far to search
@@ -29,12 +28,14 @@ public class ProjectileWeaponController : MonoBehaviour
         indicator = GetComponentInChildren<IndicatorController>();
         center = indicator != null ? indicator.transform.parent : transform;
 
-        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-        foreach (GameObject obj in allObjects)
+        // Search only in children of this GameObject
+        Transform[] childTransforms = GetComponentsInChildren<Transform>(true);
+
+        foreach (Transform child in childTransforms)
         {
-            if (obj.CompareTag("Projectile"))
+            if (child != transform && child.CompareTag("Player Projectile"))
             {
-                disabledProjectiles.Add(obj);
+                disabledProjectiles.Add(child.gameObject);
             }
         }
     }
@@ -63,7 +64,8 @@ public class ProjectileWeaponController : MonoBehaviour
         }
         else
         {
-            projectile = Instantiate(projectilePrefab);
+            projectile = Instantiate(projectilePrefab, transform.Find("Projectiles"));
+            projectile.SetActive(true);
         }
 
         // Aim like melee: pick nearest enemy in cone; else straight along indicator
@@ -72,15 +74,15 @@ public class ProjectileWeaponController : MonoBehaviour
         {
             direction = (UnityEngine.Vector2)transform.up; // fallback to forward if direction == 0
         }
+
         // Spawn from the same origin used for aiming (indicator's parent if present)
         projectile.transform.position = transform.position + (UnityEngine.Vector3)(direction.normalized * spawnOffset);
         projectile.transform.up = direction; // Align the projectile's up direction with the firing direction
 
+        projectile.transform.SetParent(null);
+
         Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.linearVelocity = direction * projectileSpeed;
-        }
+        rb.linearVelocity = direction * projectileSpeed;
 
         activeProjectiles.Add(projectile);
     }
@@ -154,6 +156,7 @@ public class ProjectileWeaponController : MonoBehaviour
                 projectile.SetActive(false);
                 disabledProjectiles.Add(projectile);
                 activeProjectiles.RemoveAt(i);
+                transform.SetParent(transform.Find("Projectiles"));
             }
         }
     }

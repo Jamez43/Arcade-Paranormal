@@ -8,7 +8,6 @@ public class EnemyStats_Testing : EnemyStats
     [SerializeField] private float speed = 1f;
     [SerializeField] private float attackDelay = 0f;
     [SerializeField] private float defense = 0f;
-    [SerializeField] private string attackType = "Melee";
     [SerializeField] private int cost = 1;
 
     public override float MaxHealth => maxHealth;
@@ -16,6 +15,5 @@ public class EnemyStats_Testing : EnemyStats
     public override float Speed => speed;
     public override float AttackDelay => attackDelay;
     public override float Defense => defense;
-    public override string AttackType => attackType;
     public override int Cost => cost;
 }

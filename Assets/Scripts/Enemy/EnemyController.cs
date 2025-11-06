@@ -1,12 +1,10 @@
 using UnityEngine;
-
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] public EnemyStats stats;
     public float currentHealth { get; private set; }
     private HealthBar healthBar;
     private Collider2D enemyCollider;
-
     private XPController XPController;
 
     private void Awake()
@@ -52,7 +50,10 @@ public class EnemyController : MonoBehaviour
             EnemySpawning enemySpawning = FindFirstObjectByType<EnemySpawning>();
             if (enemySpawning != null)
             {
-                enemySpawning.disabledEnemies.Add(gameObject);
+                if (!enemySpawning.disabledEnemies.Contains(gameObject))
+                {
+                    enemySpawning.disabledEnemies.Add(gameObject);
+                }
             }
 
             GameObject xpPrefab = Resources.Load<GameObject>("XP");
@@ -65,18 +66,6 @@ public class EnemyController : MonoBehaviour
                 GameObject xpInstance = XPController.disabledXP[0];
                 xpInstance.transform.position = transform.position;
                 xpInstance.SetActive(true);
-            }
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            PlayerController player = collision.collider.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                player.ApplyDamage(stats.Damage);
             }
         }
     }
