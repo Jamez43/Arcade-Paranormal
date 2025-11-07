@@ -1,12 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
-public class CabinetAttack : MonoBehaviour
+using Unity.VisualScripting;
+public class PinballAttack : MonoBehaviour
 {
-    [SerializeField] private EnemyStats_ArcadeCabinet stats;
+    [SerializeField] private EnemyStats_Pinball stats;
     private float elapsedTime;
     [SerializeField] private GameObject projectilePrefab;
     public List<GameObject> disabledProjectiles = new List<GameObject>();
     public List<GameObject> activeProjectiles = new List<GameObject>();
+    // Track when each projectile was fired
+    private readonly Dictionary<GameObject, float> spawnTimes = new Dictionary<GameObject, float>();
 
     private void Start()
     {
@@ -30,7 +33,7 @@ public class CabinetAttack : MonoBehaviour
 
     private void Update()
     {
-        RemoveOffScreenProjectiles();
+        RemoveExpiredProjectiles();
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= stats.AttackDelay)
         {
@@ -69,26 +72,22 @@ public class CabinetAttack : MonoBehaviour
         rb.linearVelocity = direction * stats.ProjectileSpeed;
 
         activeProjectiles.Add(projectile);
+        spawnTimes[projectile] = Time.time;
     }
 
-
-    private void RemoveOffScreenProjectiles()
+    // Disable projectiles that exceed their uptime (lifetime)
+    private void RemoveExpiredProjectiles()
     {
         for (int i = activeProjectiles.Count - 1; i >= 0; i--)
         {
             GameObject projectile = activeProjectiles[i];
-            UnityEngine.Vector3 screenPos = Camera.main.WorldToViewportPoint(projectile.transform.position);
-            float buffer = .5f;
-            bool onScreen = screenPos.z > 0 &&
-                            screenPos.x > -buffer && screenPos.x < 1 + buffer &&
-                            screenPos.y > -buffer && screenPos.y < 1 + buffer;
-
-            if (!onScreen)
+            if (Time.time - spawnTimes[projectile] >= stats.ProjectileLifetime)
             {
                 projectile.SetActive(false);
                 disabledProjectiles.Add(projectile);
                 activeProjectiles.RemoveAt(i);
-                transform.SetParent(transform.Find("Projectiles"));
+                spawnTimes.Remove(projectile);
+                projectile.transform.SetParent(transform.Find("Projectiles"));
             }
         }
     }

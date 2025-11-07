@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EnemyStats_Joystick
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats_Joystick
   maxHealth: 10
-  damage: 5
-  speed: 1
+  damage: 2.5
+  speed: 1.5
   attackDelay: 0.8
   defense: 0
   cost: 1

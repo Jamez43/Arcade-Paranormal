@@ -9,11 +9,13 @@ public class EnemyStats_ArcadeCabinet : EnemyStats
     [SerializeField] private float attackDelay = 1f;
     [SerializeField] private float defense = 0f;
     [SerializeField] private int cost = 1;
+    [SerializeField] private float projectileSpeed = 5f;
 
     public override float MaxHealth => maxHealth;
     public override float Damage => damage;
     public override float Speed => speed;
     public override float AttackDelay => attackDelay;
+    public float ProjectileSpeed => projectileSpeed;
     public override float Defense => defense;
     public override int Cost => cost;
 }
