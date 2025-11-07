@@ -2401,6 +2401,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Pinball (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5802374782918616696, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731401056086605992, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731401056086605992, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8506368924061875686, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.33153
@@ -3362,6 +3374,10 @@ MonoBehaviour:
   - {fileID: 705692569}
   - {fileID: 604851824}
   spawnRetryAttempts: 8
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  spawnClearRadius: 0.6
 --- !u!4 &1147302324
 Transform:
   m_ObjectHideFlags: 0
@@ -4241,6 +4257,18 @@ PrefabInstance:
     - target: {fileID: 5802374782918616696, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
       propertyPath: m_Name
       value: Enemy_Pinball (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802374782918616696, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731401056086605992, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731401056086605992, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8506368924061875686, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6332,6 +6360,18 @@ PrefabInstance:
     - target: {fileID: 5802374782918616696, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
       propertyPath: m_Name
       value: Enemy_Pinball
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802374782918616696, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731401056086605992, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731401056086605992, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8506368924061875686, guid: 2d959eae0d7f5c64784dc6c3859613e6, type: 3}
       propertyPath: m_LocalPosition.x

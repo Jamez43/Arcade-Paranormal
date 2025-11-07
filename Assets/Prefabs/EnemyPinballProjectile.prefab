@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 129690771651384617}
   m_Layer: 0
   m_Name: EnemyPinballProjectile
-  m_TagString: Enemy Cabinet Projectile
+  m_TagString: Enemy Pinball Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

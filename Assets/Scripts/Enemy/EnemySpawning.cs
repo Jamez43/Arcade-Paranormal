@@ -18,6 +18,12 @@ public class EnemySpawning : MonoBehaviour
     [SerializeField] private Transform[] spawnBoundsMarkers = new Transform[4];
     [SerializeField] private int spawnRetryAttempts = 8;
 
+    [Header("Spawn Blocking")]
+    [Tooltip("Layers that should block enemy spawns (recommended: create an 'Obstacle' layer and assign to walls/objects)")]
+    [SerializeField] private LayerMask obstacleLayers;
+    [Tooltip("Radius used to check for collisions when picking a spawn point")]
+    [SerializeField] private float spawnClearRadius = 0.6f;
+
     private float minX, maxX, minY, maxY;
 
     private List<string> enemyNames = new List<string>();
@@ -138,7 +144,7 @@ public class EnemySpawning : MonoBehaviour
             radius = spawnRadius * Random.Range(0.8f, 1.2f);
             candidate = playerTransform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius;
 
-            if (IsWithinBounds(candidate, minX, maxX, minY, maxY))
+            if (IsWithinBounds(candidate, minX, maxX, minY, maxY) && !IsBlocked(candidate))
             {
                 return candidate;
             }
@@ -149,6 +155,26 @@ public class EnemySpawning : MonoBehaviour
         float clampedX = Mathf.Clamp(candidate.x, minX, maxX);
         float clampedY = Mathf.Clamp(candidate.y, minY, maxY);
         return new Vector3(clampedX, clampedY, 0f);
+    }
+
+    // Check if the candidate position overlaps any obstacle
+    private bool IsBlocked(Vector3 position)
+    {
+        // Preferred: layer-based check (fast)
+        if (obstacleLayers.value != 0)
+        {
+            var hit = Physics2D.OverlapCircle(position, spawnClearRadius, obstacleLayers);
+            if (hit != null) return true;
+        }
+
+        // Fallback: tag-based check (if layers not configured)
+        var hits = Physics2D.OverlapCircleAll(position, spawnClearRadius);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i] != null && hits[i].CompareTag("Obstacle"))
+                return true;
+        }
+        return false;
     }
 
     // Helper to compare pooled instances and prefabs by base name

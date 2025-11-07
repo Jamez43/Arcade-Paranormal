@@ -23,7 +23,7 @@ public class PinballAttack : MonoBehaviour
 
         foreach (Transform child in childTransforms)
         {
-            if (child != transform && child.CompareTag("Enemy Cabinet Projectile"))
+            if (child != transform && child.CompareTag("Enemy Pinball Projectile"))
             {
                 disabledProjectiles.Add(child.gameObject);
             }
