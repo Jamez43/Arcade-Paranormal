@@ -36,4 +36,5 @@ public class PinballProjectileCollisions : MonoBehaviour
         pinballAttack.activeProjectiles.Remove(gameObject);
 
     }
+
 }

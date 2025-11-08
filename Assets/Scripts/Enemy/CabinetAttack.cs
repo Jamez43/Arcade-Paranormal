@@ -10,7 +10,7 @@ public class CabinetAttack : MonoBehaviour
 
     private void Start()
     {
-        elapsedTime = 0f; // Initialize elapsed time
+        elapsedTime = stats.AttackDelay; // Initialize elapsed time
     }
 
     private void Awake()
