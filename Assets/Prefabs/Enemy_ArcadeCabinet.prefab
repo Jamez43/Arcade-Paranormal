@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 5267085060279650638}
   - component: {fileID: 9163689907248866373}
   - component: {fileID: 6015658243981589588}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_ArcadeCabinet
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 4831104279516498996}
   - component: {fileID: 6628633461782782516}
   - component: {fileID: 7853694489339109056}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy_Pinball
   m_TagString: Enemy
   m_Icon: {fileID: 0}
