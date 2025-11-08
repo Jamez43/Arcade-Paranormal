@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5881988933923995009}
+  - component: {fileID: 5185461378686191323}
   - component: {fileID: 4976084179290562568}
+  - component: {fileID: 1978951673281853016}
   - component: {fileID: 8978873759873635407}
   - component: {fileID: 6932608992927347499}
   - component: {fileID: 6242392851602584146}
@@ -35,6 +37,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5185461378686191323
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2829685668689774326}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebd0b3a795236b641b466ed95404b9cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4976084179290562568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,6 +72,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CabinetProjectileCollisions
   enemyStats: {fileID: 11400000, guid: afbe438e5a5775c46842cb8a9da937c9, type: 2}
+--- !u!114 &1978951673281853016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2829685668689774326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150ee0bc6e1cf434694c5780b4a3b9a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!212 &8978873759873635407
 SpriteRenderer:
   m_ObjectHideFlags: 0
