@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4976084179290562568}
   - component: {fileID: 8978873759873635407}
   - component: {fileID: 6932608992927347499}
-  - component: {fileID: 129690771651384617}
+  - component: {fileID: 6242392851602584146}
   m_Layer: 0
   m_Name: Enemy Cabinet Projectile
   m_TagString: Enemy Cabinet Projectile
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2829685668689774326}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.9712215, w: -0.23817816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.480555, y: 17.213165, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
@@ -95,8 +95,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.6509434, g: 0.08904416, b: 0.13894293, a: 1}
+  m_Sprite: {fileID: -4370418543837780961, guid: d7639c4f53c41524abe07ca4441fa120, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -133,8 +133,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &129690771651384617
-CircleCollider2D:
+--- !u!61 &6242392851602584146
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -167,5 +167,15 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.49999997
+  m_Offset: {x: 0.0021224022, y: 0.0021266937}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.6825113, y: 0.6739998}
+  m_EdgeRadius: 0
