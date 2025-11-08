@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats_Testing
   maxHealth: 200
   damage: 5
-  speed: 5
+  speed: 4
   attackDelay: 1
   defense: 0
   attackType: Melee

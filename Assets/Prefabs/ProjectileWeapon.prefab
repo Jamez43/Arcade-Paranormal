@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3223676797057550931}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.19999999, y: 0.29999998, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -189,13 +189,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileWeaponController
   playerStats: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
-  projectileSpeed: 20
+  projectileSpeed: 15
   projectilePrefab: {fileID: 2829685668689774326, guid: 55f7266c630844c299ab6d74882ffea7, type: 3}
-  spawnOffset: 0.8
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  targetSearchRadius: 12
+  targetSearchRadius: 7
   arcAngle: 20
   disabledProjectiles: []
   activeProjectiles: []

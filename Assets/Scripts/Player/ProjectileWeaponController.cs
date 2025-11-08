@@ -5,7 +5,6 @@ public class ProjectileWeaponController : MonoBehaviour
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float spawnOffset = 0.8f; // distance in front of the shooter along aim direction
     [Header("Aiming (like melee)")]
     [SerializeField] private LayerMask enemyLayer;            // set to Enemy layer
     [SerializeField] private float targetSearchRadius = 30f;  // how far to search
@@ -76,7 +75,7 @@ public class ProjectileWeaponController : MonoBehaviour
         }
 
         // Spawn from the same origin used for aiming (indicator's parent if present)
-        projectile.transform.position = transform.position + (UnityEngine.Vector3)(direction.normalized * spawnOffset);
+        projectile.transform.position = transform.position;
         projectile.transform.up = direction; // Align the projectile's up direction with the firing direction
 
         projectile.transform.SetParent(null);
