@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffccda1395d69a142960baaa3f6a7644, type: 3}
   m_Name: EnemyStats_Pinball
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats_Pinball
-  maxHealth: 5
+  maxHealth: 7
   damage: 10
   speed: 0.3
   attackDelay: 5
