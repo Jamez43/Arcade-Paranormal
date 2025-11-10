@@ -18,7 +18,7 @@ public class PinballProjectileCollisions : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<PlayerController>().ApplyDamage(enemyStats.Damage);
-            DisableProjectile();
+            rb.linearVelocity = -rb.linearVelocity;
         }
         else if (collision.CompareTag("Obstacle"))
         {

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats_ArcadeCabinet
   maxHealth: 10
   damage: 5
-  speed: 0.5
+  speed: 0.3
   attackDelay: 2
   defense: 0
   cost: 1
+  projectileSpeed: 4

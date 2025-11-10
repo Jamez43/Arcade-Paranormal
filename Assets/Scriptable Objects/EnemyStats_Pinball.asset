@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats_Pinball
   maxHealth: 7
   damage: 10
-  speed: 0.3
+  speed: 0.1
   attackDelay: 5
   defense: 0
   cost: 3
