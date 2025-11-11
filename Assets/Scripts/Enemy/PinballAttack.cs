@@ -33,6 +33,10 @@ public class PinballAttack : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.instance.isPaused)
+        {
+            return;
+        }
         RemoveExpiredProjectiles();
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= stats.AttackDelay)

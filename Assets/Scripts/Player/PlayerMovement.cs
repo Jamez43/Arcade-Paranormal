@@ -24,6 +24,12 @@ public class PlayerMovement : MonoBehaviour
         inputActions.FindActionMap("Gameplay").Disable();
     }
 
+    public void SwitchInputMap(string oldMap, string newMap)
+    {
+        inputActions.FindActionMap(oldMap).Disable();
+        inputActions.FindActionMap(newMap).Enable();
+    }
+
     private void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");

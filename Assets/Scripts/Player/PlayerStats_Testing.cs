@@ -18,4 +18,21 @@ public class PlayerStats_Testing : PlayerStats
     public override float Defense { get => defense; set => defense = value; }
     public override string AttackType { get => attackType; set => attackType = value; }
     public override float PickupRange { get => pickupRange; set => pickupRange = value; }
+
+    private float initialMaxHealth = 100f;
+    private float initialDamage = 5f;
+    private float initialSpeed = 5f;
+    private float initialCooldown = 1f;
+    private float initialDefense = 0f;
+    private float initialPickupRange = .5f;
+
+    public override void ResetStats()
+    {
+        maxHealth = initialMaxHealth;
+        damage = initialDamage;
+        speed = initialSpeed;
+        cooldown = initialCooldown;
+        defense = initialDefense;
+        pickupRange = initialPickupRange;
+    }
 }

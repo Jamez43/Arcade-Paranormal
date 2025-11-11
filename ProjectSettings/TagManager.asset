@@ -11,6 +11,8 @@ TagManager:
   - Enemy Cabinet Projectile
   - Projectile
   - Enemy Pinball Projectile
+  - Joystick
+  - Indicator
   layers:
   - Default
   - TransparentFX

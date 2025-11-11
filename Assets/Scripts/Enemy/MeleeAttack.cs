@@ -11,6 +11,10 @@ public class MeleeAttack : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if (PauseManager.instance.isPaused)
+        {
+            return;
+        }
         if (collision.collider.CompareTag("Player"))
         {
             // Check if enough time has passed since last damage

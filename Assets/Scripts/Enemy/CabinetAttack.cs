@@ -30,6 +30,10 @@ public class CabinetAttack : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.instance.isPaused)
+        {
+            return;
+        }
         RemoveOffScreenProjectiles();
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= stats.AttackDelay)

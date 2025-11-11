@@ -9,4 +9,6 @@ public abstract class PlayerStats : ScriptableObject
     public abstract float Defense { get; set; } //Percentage
     public abstract string AttackType { get; set; }
     public abstract float PickupRange { get; set; }
+
+    public abstract void ResetStats();
 }

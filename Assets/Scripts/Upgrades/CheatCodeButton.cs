@@ -12,5 +12,6 @@ public class CheatCodeButton : MonoBehaviour
 
         parentPanel = transform.parent.gameObject;
         parentPanel.SetActive(false);
+        PauseManager.instance.UnPauseGame();
     }
 }

@@ -12,5 +12,7 @@ public class CircuitOverloadButton : MonoBehaviour
 
         parentPanel = transform.parent.gameObject;
         parentPanel.SetActive(false);
+        PauseManager.instance.UnPauseGame();
+
     }
 }

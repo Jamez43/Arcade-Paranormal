@@ -391,6 +391,11 @@ Transform:
   - {fileID: 1726111859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &201909301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7592080416388025947, guid: 3007c890b60064088aedade4722699c6, type: 3}
+  m_PrefabInstance: {fileID: 6920710544377689478}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &243108058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1274936771757382758, guid: 07fb0dbfa338246e8979647cf7f73f19, type: 3}
@@ -599,6 +604,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07fb0dbfa338246e8979647cf7f73f19, type: 3}
+--- !u!1 &484908340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7198357173571623051, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+  m_PrefabInstance: {fileID: 1447638393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &508660926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1274936771757382758, guid: 07fb0dbfa338246e8979647cf7f73f19, type: 3}
@@ -1632,6 +1642,14 @@ PrefabInstance:
       propertyPath: xpController
       value: 
       objectReference: {fileID: 1147302325}
+    - target: {fileID: 8767855792132062955, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
+      propertyPath: levelUpXPThreshold
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767855792132062955, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
+      propertyPath: upgradesMenuContainer
+      value: 
+      objectReference: {fileID: 484908340}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2940,12 +2958,24 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 77320424402287214, guid: 3007c890b60064088aedade4722699c6, type: 3}
   m_PrefabInstance: {fileID: 6920710544377689478}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 201909301}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c7040eaa206e49469c2e22f94c120c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::XPController
+--- !u!114 &1147302326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 201909301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd3ff28d2ab9451b95dca9fe07b30a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &1149639646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3721,14 +3751,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradesCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 421253092072410926, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 901163985756101143, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3807,10 +3829,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3810605393231198297, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5446,6 +5464,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2123693772018277373, guid: 92dcf6421309241e2a42b765ba636b66, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4004308039946400978, guid: 92dcf6421309241e2a42b765ba636b66, type: 3}
       propertyPath: m_Name
       value: JoystickCanvas
@@ -5711,7 +5733,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7592080416388025947, guid: 3007c890b60064088aedade4722699c6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1147302326}
   m_SourcePrefab: {fileID: 100100000, guid: 3007c890b60064088aedade4722699c6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

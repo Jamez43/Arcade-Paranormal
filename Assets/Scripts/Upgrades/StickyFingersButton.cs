@@ -9,8 +9,11 @@ public class StickyFingersButton : MonoBehaviour
     {
         playerStats.PickupRange *= 1.1f;
         Debug.Log("Pickup Range increased to: " + playerStats.PickupRange);
+        GameObject.FindWithTag("Player").GetComponent<CircleCollider2D>().radius = playerStats.PickupRange;
 
         parentPanel = transform.parent.gameObject;
         parentPanel.SetActive(false);
+        PauseManager.instance.UnPauseGame();
+
     }
 }

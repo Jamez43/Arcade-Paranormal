@@ -14,5 +14,7 @@ public class GamerFuelButton : MonoBehaviour
 
         parentPanel = transform.parent.gameObject;
         parentPanel.SetActive(false);
+        PauseManager.instance.UnPauseGame();
+
     }
 }

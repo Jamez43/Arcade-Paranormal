@@ -7,10 +7,12 @@ public class ExtensionCordButton : MonoBehaviour
 
     public void updateCooldown()
     {
-        playerStats.Cooldown *= 1.1f;
+        playerStats.Cooldown *= 0.9f;
         Debug.Log("Cooldown increased to: " + playerStats.Cooldown);
 
         parentPanel = transform.parent.gameObject;
         parentPanel.SetActive(false);
+        PauseManager.instance.UnPauseGame();
+
     }
 }
