@@ -21,7 +21,7 @@ public class ProjectileWeaponController : MonoBehaviour
     private void Awake()
     {
         cooldownBar = Object.FindAnyObjectByType<CooldownBar>();
-        cooldownBar.UpdateCooldownBar(playerStats.AttackDelay, playerStats.AttackDelay);
+        cooldownBar.UpdateCooldownBar(playerStats.Cooldown, playerStats.Cooldown);
 
         // Find the aim indicator (same pattern as melee)
         indicator = GetComponentInChildren<IndicatorController>();
@@ -43,9 +43,9 @@ public class ProjectileWeaponController : MonoBehaviour
     {
         RemoveOffScreenProjectiles();
         elapsedTime += Time.deltaTime;
-        cooldownBar.UpdateCooldownBar(elapsedTime, playerStats.AttackDelay);
+        cooldownBar.UpdateCooldownBar(elapsedTime, playerStats.Cooldown);
 
-        if (elapsedTime >= playerStats.AttackDelay)
+        if (elapsedTime >= playerStats.Cooldown)
         {
             elapsedTime = 0f;
             FireWeapon();

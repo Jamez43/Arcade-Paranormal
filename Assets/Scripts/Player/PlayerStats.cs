@@ -2,10 +2,11 @@ using UnityEngine;
 
 public abstract class PlayerStats : ScriptableObject
 {
-    public abstract float MaxHealth { get; }
-    public abstract float Damage { get; }
-    public abstract float Speed { get; }
-    public abstract float AttackDelay { get; }
-    public abstract float Defense { get; }
-    public abstract string AttackType { get; }
+    public abstract float MaxHealth { get; set; }
+    public abstract float Damage { get; set; }
+    public abstract float Speed { get; set; }
+    public abstract float Cooldown { get; set; }
+    public abstract float Defense { get; set; } //Percentage
+    public abstract string AttackType { get; set; }
+    public abstract float PickupRange { get; set; }
 }

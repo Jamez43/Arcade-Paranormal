@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1274936771757382758}
   - component: {fileID: 4057354742926476235}
-  - component: {fileID: 8760663635707694448}
-  - component: {fileID: 6830309909229116901}
-  m_Layer: 0
+  - component: {fileID: 724774264486886610}
+  m_Layer: 7
   m_Name: XP
   m_TagString: XP
   m_Icon: {fileID: 0}
@@ -28,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1851481682192211512}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.702622, y: -0.14636731, z: 0}
+  m_LocalPosition: {x: 4.332717, y: 2.8079581, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,19 +91,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8760663635707694448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851481682192211512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b74362a23c6b943e58c99f6e07aaa1f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::XPCollisions
---- !u!58 &6830309909229116901
+--- !u!58 &724774264486886610
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

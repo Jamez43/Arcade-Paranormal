@@ -22,18 +22,18 @@ public class EnemyDetector : MonoBehaviour
             center = indicator.transform.parent; // usually the player
         }
         cooldownBar = Object.FindAnyObjectByType<CooldownBar>();
-        cooldownBar.UpdateCooldownBar(playerStats.AttackDelay, playerStats.AttackDelay);
+        cooldownBar.UpdateCooldownBar(playerStats.Cooldown, playerStats.Cooldown);
     }
 
     private void Update()
     {
         elapsedTime += Time.deltaTime;
-        cooldownBar.UpdateCooldownBar(elapsedTime, playerStats.AttackDelay);
+        cooldownBar.UpdateCooldownBar(elapsedTime, playerStats.Cooldown);
 
         // Indicator’s forward direction (up axis after rotation)
         Vector2 forwardDir = indicator.transform.up;
 
-        if (elapsedTime >= playerStats.AttackDelay)
+        if (elapsedTime >= playerStats.Cooldown)
         {
             elapsedTime = 0f;
             DetectEnemies(center.position, forwardDir);

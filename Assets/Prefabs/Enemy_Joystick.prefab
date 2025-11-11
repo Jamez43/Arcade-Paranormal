@@ -99,6 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4017852790674023686}
+  - component: {fileID: 9043382508263497310}
   - component: {fileID: 879684794154747780}
   - component: {fileID: 8120340001894572784}
   - component: {fileID: 2205650556974591999}
@@ -127,6 +128,19 @@ Transform:
   - {fileID: 4039605124373748048}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9043382508263497310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437140033208268412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8308925e52907e46b052093f1cf4d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeAttack
+  stats: {fileID: 11400000, guid: 0015833b53022f94f831d22a75e003d6, type: 2}
 --- !u!114 &879684794154747780
 MonoBehaviour:
   m_ObjectHideFlags: 0
