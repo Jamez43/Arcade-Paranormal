@@ -1,27 +1,29 @@
 using UnityEngine;
 
-public class EnemyDetector : MonoBehaviour
+public class MeleeWeaponController : MonoBehaviour
 {
     [SerializeField] private float radius = 1.5f;
     [SerializeField] private float arcAngle = 75f;        // half-angle of cone
     [SerializeField] private LayerMask enemyLayer;        // assign Enemy layer for efficiency
-    [SerializeField] private PlayerStats playerStats;
-    private CooldownBar cooldownBar;
 
+    private PlayerRuntimeStats playerStats;
+    private CooldownBar cooldownBar;
     private Transform center;
     private IndicatorController indicator;
-
     private float elapsedTime;
 
 
-    private void Awake()
+    private void Start()
     {
+        // Get runtime stats from PlayerController
+        playerStats = GetComponentInParent<PlayerController>().Stats;
+
         indicator = GetComponentInChildren<IndicatorController>();
         if (indicator != null)
         {
             center = indicator.transform.parent; // usually the player
         }
-        cooldownBar = Object.FindAnyObjectByType<CooldownBar>();
+        cooldownBar = FindFirstObjectByType<CooldownBar>();
         cooldownBar.UpdateCooldownBar(playerStats.Cooldown, playerStats.Cooldown);
     }
 
@@ -56,22 +58,6 @@ public class EnemyDetector : MonoBehaviour
                     dealAttack(hit.GetComponent<EnemyController>());
                 }
             }
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (indicator != null)
-        {
-            indicator.gameObject.SetActive(false);
-        }
-    }
-
-    private void OnEnable()
-    {
-        if (indicator != null)
-        {
-            indicator.gameObject.SetActive(true);
         }
     }
 

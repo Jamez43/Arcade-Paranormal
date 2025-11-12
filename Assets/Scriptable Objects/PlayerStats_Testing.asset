@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7392d6ee8e148118af6be74664c925, type: 3}
   m_Name: PlayerStats_Testing
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats_Testing
-  maxHealth: 200
+  maxHealth: 10
   damage: 5
-  speed: 2
-  attackDelay: 1
+  speed: 5
+  cooldown: 1
   defense: 0
   attackType: Melee
+  pickupRange: 0.5

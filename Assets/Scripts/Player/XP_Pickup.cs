@@ -3,17 +3,20 @@ using UnityEngine;
 public class XP_Pickup : MonoBehaviour
 {
     [SerializeField] private CircleCollider2D pickupCollider;
-    [SerializeField] private PlayerStats playerStats;
     [SerializeField] private XPController xpController;
 
-    private void Awake()
+    private PlayerRuntimeStats playerStats;
+
+    private void Start()
     {
-        pickupCollider = GetComponent<CircleCollider2D>();
+        // Get runtime stats from PlayerController (use Start to ensure PlayerController.Awake has run)
+        playerStats = GetComponent<PlayerController>().Stats;
         pickupCollider.radius = playerStats.PickupRange;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (PauseManager.instance.isPaused) return;
         if (collision.CompareTag("XP"))
         {
             float xpAmount = Random.Range(5, 10);

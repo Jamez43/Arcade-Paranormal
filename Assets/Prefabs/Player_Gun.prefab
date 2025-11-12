@@ -56,7 +56,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  stats: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
 --- !u!114 &8767855792132062955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113b6998bd01a4e30a9d9809da1e8e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  stats: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
+  baseStats: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
+  upgradesMenuContainer: {fileID: 201644246294055522, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+  levelUpXPThreshold: 100
 --- !u!114 &4474186432520106925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,7 +84,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::XP_Pickup
   pickupCollider: {fileID: 7584022395282770062}
-  playerStats: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
   xpController: {fileID: 0}
 --- !u!50 &1328599875149004943
 Rigidbody2D:

@@ -1578,6 +1578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Melee
       objectReference: {fileID: 0}
+    - target: {fileID: 3665222204008043932, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
     - target: {fileID: 3755447795415509553, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1634,14 +1638,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5816048739451205880, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
     - target: {fileID: 6177355866435181312, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7399020701295790572, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
+    - target: {fileID: 7399020701295790572, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
       propertyPath: xpController
       value: 
       objectReference: {fileID: 1147302325}
+    - target: {fileID: 8767855792132062955, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
     - target: {fileID: 8767855792132062955, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
       propertyPath: upgradesMenuContainer
       value: 

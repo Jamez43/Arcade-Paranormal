@@ -5,14 +5,12 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputActionAsset inputActions;
-    [SerializeField] private PlayerStats stats;
 
     private InputAction moveAction;
-
     private Vector2 moveAmount;
     private float currentSpeed;
-
     private Collider2D playerCollider;
+    private PlayerRuntimeStats stats;
 
     private void OnEnable()
     {
@@ -34,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         playerCollider = GetComponent<Collider2D>();
+        stats = GetComponent<PlayerController>().Stats;
         currentSpeed = stats.Speed;
     }
 

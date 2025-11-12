@@ -13,6 +13,8 @@ TagManager:
   - Enemy Pinball Projectile
   - Joystick
   - Indicator
+  - Game Over Menu
+  - Cooldown Bar
   layers:
   - Default
   - TransparentFX

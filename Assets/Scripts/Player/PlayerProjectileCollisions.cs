@@ -3,11 +3,13 @@ using UnityEngine;
 
 public class PlayerProjectileCollisions : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStats;
+    private PlayerRuntimeStats playerStats;
     private ProjectileWeaponController projectileWeaponController;
 
     private void Awake()
     {
+        // Get runtime stats from PlayerController
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Stats;
         projectileWeaponController = FindFirstObjectByType<ProjectileWeaponController>();
     }
 

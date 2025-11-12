@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class StickyFingersButton : MonoBehaviour
 {
-    [SerializeField] private PlayerStats playerStats;
     private GameObject parentPanel;
 
     public void updatePickupRange()
     {
-        playerStats.PickupRange *= 1.1f;
-        Debug.Log("Pickup Range increased to: " + playerStats.PickupRange);
-        GameObject.FindWithTag("Player").GetComponent<CircleCollider2D>().radius = playerStats.PickupRange;
+        PlayerController player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        player.Stats.ApplyPickupRangeUpgrade(1.1f);
+        Debug.Log("Pickup Range increased to: " + player.Stats.PickupRange);
+
+        // Update the pickup collider radius
+        player.GetComponent<CircleCollider2D>().radius = player.Stats.PickupRange;
 
         parentPanel = transform.parent.gameObject;
         parentPanel.SetActive(false);
         PauseManager.instance.UnPauseGame();
-
     }
 }

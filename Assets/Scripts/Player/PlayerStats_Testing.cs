@@ -11,28 +11,18 @@ public class PlayerStats_Testing : PlayerStats
     [SerializeField] private string attackType = "Melee";
     [SerializeField] private float pickupRange = .5f;
 
-    public override float MaxHealth { get => maxHealth; set => maxHealth = value; }
-    public override float Damage { get => damage; set => damage = value; }
-    public override float Speed { get => speed; set => speed = value; }
-    public override float Cooldown { get => cooldown; set => cooldown = value; }
-    public override float Defense { get => defense; set => defense = value; }
-    public override string AttackType { get => attackType; set => attackType = value; }
-    public override float PickupRange { get => pickupRange; set => pickupRange = value; }
-
-    private float initialMaxHealth = 100f;
-    private float initialDamage = 5f;
-    private float initialSpeed = 5f;
-    private float initialCooldown = 1f;
-    private float initialDefense = 0f;
-    private float initialPickupRange = .5f;
+    // Read-only properties - base stats should never be modified at runtime
+    public override float MaxHealth { get => maxHealth; set { } }
+    public override float Damage { get => damage; set { } }
+    public override float Speed { get => speed; set { } }
+    public override float Cooldown { get => cooldown; set { } }
+    public override float Defense { get => defense; set { } }
+    public override string AttackType { get => attackType; set { } }
+    public override float PickupRange { get => pickupRange; set { } }
 
     public override void ResetStats()
     {
-        maxHealth = initialMaxHealth;
-        damage = initialDamage;
-        speed = initialSpeed;
-        cooldown = initialCooldown;
-        defense = initialDefense;
-        pickupRange = initialPickupRange;
+        // This method is no longer needed since base stats don't change
+        // Runtime stats will be reset via PlayerRuntimeStats.ResetToBaseStats()
     }
 }

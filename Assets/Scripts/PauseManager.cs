@@ -17,7 +17,14 @@ public class PauseManager : MonoBehaviour
             instance = this;
         }
 
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        RefreshReferences();
+    }
+
+    private void RefreshReferences()
+    {
+        // Refresh references in case scene reloaded
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        playerMovement = playerObj.GetComponent<PlayerMovement>();
         joystick = GameObject.FindWithTag("Joystick");
         indicator = GameObject.FindWithTag("Indicator");
     }
@@ -25,19 +32,29 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
+        Debug.Log("Pausing Game");
         isPaused = true;
         Time.timeScale = 0f;
         playerMovement.SwitchInputMap("Gameplay", "UI");
         joystick.SetActive(false);
         indicator.SetActive(false);
-
     }
 
     public void UnPauseGame()
     {
+        // Refresh references in case they're stale
+        if (playerMovement == null)
+        {
+            RefreshReferences();
+        }
+
+        Debug.Log("Unpausing Game");
         isPaused = false;
         Time.timeScale = 1f;
-        playerMovement.SwitchInputMap("UI", "Gameplay");
+        if (playerMovement != null)
+        {
+            playerMovement.SwitchInputMap("UI", "Gameplay");
+        }
         joystick.SetActive(true);
         indicator.SetActive(true);
     }
