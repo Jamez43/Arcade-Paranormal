@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
         gameOverMenu.SetActive(false);
 
-        Debug.Log("Player Awake: currentHealth = " + currentHealth + ", MaxHealth = " + runtimeStats.MaxHealth);
     }
 
     private void Start()
@@ -68,7 +67,6 @@ public class PlayerController : MonoBehaviour
         float damageAfterDefense = damageAmount * (1 - runtimeStats.Defense);
         if (damageAfterDefense > 0)
         {
-            Debug.Log("ApplyDamage: Taking " + damageAfterDefense + " damage. Health: " + currentHealth + " -> " + (currentHealth - damageAfterDefense));
             currentHealth -= damageAfterDefense;
             healthBar.gameObject.SetActive(true);
             healthBar.UpdateHealthBar(currentHealth, runtimeStats.MaxHealth);
@@ -129,7 +127,6 @@ public class PlayerController : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            Debug.Log("CheckDie: Player died with currentHealth = " + currentHealth);
             gameOverMenu.SetActive(true);
             healthBar.gameObject.SetActive(false);
             coolDownBarCanvas.SetActive(false);

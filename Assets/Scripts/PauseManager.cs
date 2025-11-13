@@ -32,7 +32,6 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Pausing Game");
         isPaused = true;
         Time.timeScale = 0f;
         playerMovement.SwitchInputMap("Gameplay", "UI");
@@ -48,7 +47,6 @@ public class PauseManager : MonoBehaviour
             RefreshReferences();
         }
 
-        Debug.Log("Unpausing Game");
         isPaused = false;
         Time.timeScale = 1f;
         if (playerMovement != null)
