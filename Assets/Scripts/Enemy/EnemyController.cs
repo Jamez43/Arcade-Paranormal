@@ -56,9 +56,9 @@ public class EnemyController : MonoBehaviour
                 }
             }
 
-            GameObject xpPrefab = Resources.Load<GameObject>("XP");
             if (XPController.disabledXP.Count == 0)
             {
+                GameObject xpPrefab = Resources.Load<GameObject>("XP");
                 Instantiate(xpPrefab, transform.position, Quaternion.identity);
             }
             else
@@ -66,6 +66,7 @@ public class EnemyController : MonoBehaviour
                 GameObject xpInstance = XPController.disabledXP[0];
                 xpInstance.transform.position = transform.position;
                 xpInstance.SetActive(true);
+                XPController.disabledXP.RemoveAt(0);
             }
         }
     }
