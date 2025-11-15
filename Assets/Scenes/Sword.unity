@@ -1740,6 +1740,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1147302325}
     - target: {fileID: 8767855792132062955, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
+      propertyPath: levelUpXPThreshold
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767855792132062955, guid: e90b5b9f919614ed1b0d2b4ef80180ee, type: 3}
       propertyPath: upgradesMenuContainer
       value: 
       objectReference: {fileID: 484908340}
@@ -3942,9 +3946,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 13607983874302854, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 201644246294055522, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_Name
       value: UpgradesCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 421253092072410926, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901163985756101143, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_Pivot.x
@@ -4024,6 +4040,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3810605393231198297, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260713129987916611, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904382592570753896, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

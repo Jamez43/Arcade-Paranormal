@@ -197,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2670717581960008255, guid: cb5efcfc6013b4840a6f87134dd30992, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8999935692887567676, guid: cb5efcfc6013b4840a6f87134dd30992, type: 3}
       propertyPath: m_Pivot.x
@@ -261,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8999935692887567676, guid: cb5efcfc6013b4840a6f87134dd30992, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 300
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 8999935692887567676, guid: cb5efcfc6013b4840a6f87134dd30992, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3830142493561349539, guid: 991ff6d6a52a64eedbc60b862cf69c93, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5280959229840040613, guid: 991ff6d6a52a64eedbc60b862cf69c93, type: 3}
       propertyPath: m_Pivot.x
@@ -367,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5280959229840040613, guid: 991ff6d6a52a64eedbc60b862cf69c93, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -300
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5280959229840040613, guid: 991ff6d6a52a64eedbc60b862cf69c93, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -489,7 +489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4073890945590288578, guid: f8287cb6b57e54d7e962cda4a08cb437, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -571,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2789782454259765744, guid: 8432ce89d3cee4258b6c7f2c8137a64d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 300
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2789782454259765744, guid: 8432ce89d3cee4258b6c7f2c8137a64d, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -595,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7485750390620076507, guid: 8432ce89d3cee4258b6c7f2c8137a64d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7887011323019975953, guid: 8432ce89d3cee4258b6c7f2c8137a64d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -655,7 +655,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3612355c5b0f54e05b192d60224f38ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CheatCodeButton
-  playerStats: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
 --- !u!1001 &6660912488173986297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -738,7 +737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1286152898328973184, guid: 8dc3c900ccba348f486add3423bcad10, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 1286152898328973184, guid: 8dc3c900ccba348f486add3423bcad10, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -759,6 +758,10 @@ PrefabInstance:
     - target: {fileID: 6647322938447823487, guid: 8dc3c900ccba348f486add3423bcad10, type: 3}
       propertyPath: m_Name
       value: Circuit Overload Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6647322938447823487, guid: 8dc3c900ccba348f486add3423bcad10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -784,7 +787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3826388121420830335, guid: 05080530256c848c0b0ba270f154dc4c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5977013119564430301, guid: 05080530256c848c0b0ba270f154dc4c, type: 3}
       propertyPath: m_Pivot.x
@@ -848,7 +851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5977013119564430301, guid: 05080530256c848c0b0ba270f154dc4c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 300
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 5977013119564430301, guid: 05080530256c848c0b0ba270f154dc4c, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -362,6 +362,11 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!1 &133401364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7198357173571623051, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+  m_PrefabInstance: {fileID: 1447638393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &142643558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,6 +2217,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8767855792132062955, guid: fe7eaf30318c34ba6b399d4856539a37, type: 3}
+      propertyPath: levelUpXPThreshold
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767855792132062955, guid: fe7eaf30318c34ba6b399d4856539a37, type: 3}
+      propertyPath: upgradesMenuContainer
+      value: 
+      objectReference: {fileID: 133401364}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3761,6 +3774,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradesCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 201644246294055522, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 421253092072410926, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901163985756101143, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3839,6 +3864,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3810605393231198297, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6260713129987916611, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6904382592570753896, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7198357173571623051, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
