@@ -1,14 +1,18 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyFollow : MonoBehaviour
 {
     private Transform player;
+    private NavMeshAgent agent;
     [SerializeField] private EnemyStats stats;
-    private Rigidbody2D rb;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        agent.speed = stats.Speed;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -16,8 +20,7 @@ public class EnemyFollow : MonoBehaviour
     {
         if (player != null)
         {
-            Vector2 direction = (player.position - transform.position).normalized;
-            transform.position += (Vector3)direction * stats.Speed * Time.deltaTime;
+            agent.SetDestination(player.position);
         }
     }
 }
