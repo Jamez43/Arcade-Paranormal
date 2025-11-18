@@ -69,6 +69,8 @@
     "dotnet.defaultSolution": "Arcade-Paranormal.slnx",
     "cSpell.words": [
         "cooldown",
-        "Rigidbody"
+        "Rigidbody",
+        "Tilemap",
+        "Tilemaps"
     ]
 }

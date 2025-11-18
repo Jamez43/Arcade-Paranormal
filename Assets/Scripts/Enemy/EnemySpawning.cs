@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class EnemySpawning : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class EnemySpawning : MonoBehaviour
     [SerializeField] private float waveIntervalMax = 15f;
     [SerializeField] private float waveIntervalMin = 5f;
 
-    [Header("Spawn Bounds")]
-    [SerializeField] private Transform[] spawnBoundsMarkers = new Transform[4];
     [SerializeField] private int spawnRetryAttempts = 8;
 
     [Header("Spawn Blocking")]
@@ -23,16 +22,14 @@ public class EnemySpawning : MonoBehaviour
     [Tooltip("Radius used to check for collisions when picking a spawn point")]
     [SerializeField] private float spawnClearRadius = 0.6f;
 
-    private float minX, maxX, minY, maxY;
-
     private List<string> enemyNames = new List<string>();
     private Transform enemiesParent;
 
+    [SerializeField] private Tilemap floorTilemap;
+    [SerializeField] private Tilemap wallTilemap;
+
     private void Awake()
     {
-        // One-time setup and cache references
-        getSpawnBounds();
-
         enemiesParent = GameObject.Find("Enemies").transform;
         // Only pool inactive enemies already in the scene hierarchy
         foreach (Transform child in enemiesParent)
@@ -134,6 +131,9 @@ public class EnemySpawning : MonoBehaviour
         Vector3 candidate;
         float angle = Random.Range(0f, Mathf.PI * 2f);
         float radius;
+
+        BoundsInt bounds = floorTilemap.cellBounds;
+
         // Preferred behavior: pick a point on a circle around the player; if out of bounds, retry
         // Generate a candidate on the circle (or slightly randomized ring)
         for (int attempt = 0; attempt < Mathf.Max(1, spawnRetryAttempts); attempt++)
@@ -143,7 +143,7 @@ public class EnemySpawning : MonoBehaviour
             radius = spawnRadius * Random.Range(0.8f, 1.2f);
             candidate = playerTransform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * radius;
 
-            if (IsWithinBounds(candidate, minX, maxX, minY, maxY) && !IsBlocked(candidate))
+            if (IsWithinBounds(candidate) && !IsBlocked(candidate))
             {
                 return candidate;
             }
@@ -151,8 +151,9 @@ public class EnemySpawning : MonoBehaviour
 
         // If we failed all attempts and we have bounds, clamp to the nearest in-bounds point
         candidate = playerTransform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * spawnRadius;
-        float clampedX = Mathf.Clamp(candidate.x, minX, maxX);
-        float clampedY = Mathf.Clamp(candidate.y, minY, maxY);
+        Vector3Int cellPosition = floorTilemap.WorldToCell(candidate);
+        float clampedX = Mathf.Clamp(candidate.x, bounds.xMin, bounds.xMax);
+        float clampedY = Mathf.Clamp(candidate.y, bounds.yMin, bounds.yMax);
         return new Vector3(clampedX, clampedY, 0f);
     }
 
@@ -177,40 +178,15 @@ public class EnemySpawning : MonoBehaviour
     }
 
     // Helper to compare pooled instances and prefabs by base name
-    private static string SanitizeName(string n)
+    private string SanitizeName(string n)
     {
         return string.IsNullOrEmpty(n) ? string.Empty : n.Replace("(Clone)", string.Empty).Trim();
     }
 
-    private static bool IsWithinBounds(Vector3 position, float minX, float maxX, float minY, float maxY)
+    private bool IsWithinBounds(Vector3 position)
     {
-        return position.x >= minX && position.x <= maxX && position.y >= minY && position.y <= maxY;
-    }
-
-    private void getSpawnBounds()
-    {
-        foreach (Transform marker in spawnBoundsMarkers)
-        {
-            if (marker == null) continue;
-            if (marker.position.x < minX) minX = marker.position.x;
-            if (marker.position.x > maxX) maxX = marker.position.x;
-            if (marker.position.y < minY) minY = marker.position.y;
-            if (marker.position.y > maxY) maxY = marker.position.y;
-        }
-    }
-
-    // Visualize the spawn bounds in the Scene view
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.pink;
-        Vector3 a = new Vector3(minX, minY, 0f);
-        Vector3 b = new Vector3(maxX, minY, 0f);
-        Vector3 c = new Vector3(maxX, maxY, 0f);
-        Vector3 d = new Vector3(minX, maxY, 0f);
-
-        Gizmos.DrawLine(a, b);
-        Gizmos.DrawLine(b, c);
-        Gizmos.DrawLine(c, d);
-        Gizmos.DrawLine(d, a);
+        BoundsInt bounds = floorTilemap.cellBounds;
+        Vector3Int cellPosition = floorTilemap.WorldToCell(position);
+        return bounds.Contains(cellPosition);
     }
 }
