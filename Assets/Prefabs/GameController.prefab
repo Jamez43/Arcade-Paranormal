@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4566567236071748700}
   - component: {fileID: 6219462314054796353}
   - component: {fileID: 77320424402287214}
+  - component: {fileID: 2470000624817580290}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -72,3 +73,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::XPController
   disabledXP: []
+--- !u!114 &2470000624817580290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592080416388025947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbd3ff28d2ab9451b95dca9fe07b30a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
