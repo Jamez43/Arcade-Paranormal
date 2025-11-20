@@ -149,12 +149,32 @@ public class EnemySpawning : MonoBehaviour
             }
         }
 
-        // If we failed all attempts and we have bounds, clamp to the nearest in-bounds point
-        candidate = playerTransform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * spawnRadius;
-        Vector3Int cellPosition = floorTilemap.WorldToCell(candidate);
-        float clampedX = Mathf.Clamp(candidate.x, bounds.xMin, bounds.xMax);
-        float clampedY = Mathf.Clamp(candidate.y, bounds.yMin, bounds.yMax);
-        return new Vector3(clampedX, clampedY, 0f);
+        // If we failed all attempts, find the nearest valid tile
+        candidate = playerTransform.position;
+        Vector3Int startCell = floorTilemap.WorldToCell(candidate);
+
+        // Spiral search outward from player position to find nearest valid tile
+        int maxSearchRadius = Mathf.Max(bounds.size.x, bounds.size.y);
+        for (int searchRadius = 1; searchRadius < maxSearchRadius; searchRadius++)
+        {
+            for (int x = -searchRadius; x <= searchRadius; x++)
+            {
+                for (int y = -searchRadius; y <= searchRadius; y++)
+                {
+                    if (Mathf.Abs(x) == searchRadius || Mathf.Abs(y) == searchRadius)
+                    {
+                        Vector3Int checkCell = startCell + new Vector3Int(x, y, 0);
+                        if (floorTilemap.HasTile(checkCell))
+                        {
+                            return floorTilemap.GetCellCenterWorld(checkCell);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Fallback: return player position if no valid tile found
+        return playerTransform.position;
     }
 
     // Check if the candidate position overlaps any obstacle
@@ -185,8 +205,9 @@ public class EnemySpawning : MonoBehaviour
 
     private bool IsWithinBounds(Vector3 position)
     {
-        BoundsInt bounds = floorTilemap.cellBounds;
         Vector3Int cellPosition = floorTilemap.WorldToCell(position);
-        return bounds.Contains(cellPosition);
+
+        // Check if there's actually a floor tile at this position
+        return floorTilemap.HasTile(cellPosition) && !wallTilemap.HasTile(cellPosition);
     }
 }
