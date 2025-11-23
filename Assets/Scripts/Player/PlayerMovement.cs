@@ -14,30 +14,72 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        inputActions.FindActionMap("Gameplay").Enable();
+        if (inputActions != null)
+        {
+            inputActions.FindActionMap("Gameplay").Enable();
+        }
     }
 
     private void OnDisable()
     {
-        inputActions.FindActionMap("Gameplay").Disable();
+        if (inputActions != null)
+        {
+            inputActions.FindActionMap("Gameplay").Disable();
+        }
     }
 
     public void SwitchInputMap(string oldMap, string newMap)
     {
-        inputActions.FindActionMap(oldMap).Disable();
-        inputActions.FindActionMap(newMap).Enable();
+        if (inputActions != null)
+        {
+            inputActions.FindActionMap(oldMap).Disable();
+            inputActions.FindActionMap(newMap).Enable();
+        }
     }
 
     private void Awake()
     {
-        moveAction = InputSystem.actions.FindAction("Move");
+        if (inputActions == null)
+        {
+            Debug.LogError("Input Actions not assigned in PlayerMovement Inspector!");
+            return;
+        }
+
+        moveAction = inputActions.FindAction("Move");
+        if (moveAction == null)
+        {
+            Debug.LogError("Move action not found in Input Actions!");
+            return;
+        }
+
         playerCollider = GetComponent<Collider2D>();
-        stats = GetComponent<PlayerController>().Stats;
+        if (playerCollider == null)
+        {
+            Debug.LogError("Collider2D component not found on Player!");
+            return;
+        }
+
+        var playerController = GetComponent<PlayerController>();
+        if (playerController == null)
+        {
+            Debug.LogError("PlayerController component not found on Player!");
+            return;
+        }
+
+        stats = playerController.Stats;
+        if (stats == null)
+        {
+            Debug.LogError("PlayerController.Stats is null!");
+            return;
+        }
+
         currentSpeed = stats.Speed;
     }
 
     private void Update()
     {
+        if (moveAction == null) return;
+
         moveAmount = moveAction.ReadValue<Vector2>();
         if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
         {
