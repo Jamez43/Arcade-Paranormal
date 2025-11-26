@@ -46,33 +46,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         moveAction = inputActions.FindAction("Move");
-        if (moveAction == null)
-        {
-            Debug.LogError("Move action not found in Input Actions!");
-            return;
-        }
-
         playerCollider = GetComponent<Collider2D>();
-        if (playerCollider == null)
-        {
-            Debug.LogError("Collider2D component not found on Player!");
-            return;
-        }
-
-        var playerController = GetComponent<PlayerController>();
-        if (playerController == null)
-        {
-            Debug.LogError("PlayerController component not found on Player!");
-            return;
-        }
-
-        stats = playerController.Stats;
-        if (stats == null)
-        {
-            Debug.LogError("PlayerController.Stats is null!");
-            return;
-        }
-
+        stats = GetComponent<PlayerController>().Stats;
         currentSpeed = stats.Speed;
     }
 

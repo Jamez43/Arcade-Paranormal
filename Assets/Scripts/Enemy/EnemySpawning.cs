@@ -149,13 +149,26 @@ public class EnemySpawning : MonoBehaviour
             }
         }
 
-        // If we failed all attempts, find the nearest valid tile
+        // If we failed all attempts, sample points uniformly within the spawn radius
+        // so that fallback stays within intended ring/area around the player.
+        const int uniformSamples = 24;
+        for (int i = 0; i < uniformSamples; i++)
+        {
+            float a = (Mathf.PI * 2f) * (i / (float)uniformSamples);
+            float r = spawnRadius * Mathf.Sqrt(Random.Range(0.0f, 1.0f)); // uniform disk sampling
+            Vector3 p = playerTransform.position + new Vector3(Mathf.Cos(a), Mathf.Sin(a), 0f) * r;
+
+            if (IsWithinBounds(p) && !IsBlocked(p))
+            {
+                return p;
+            }
+        }
+
+        // As another fallback, search nearest valid tile within spawnRadius (in cells)
         candidate = playerTransform.position;
         Vector3Int startCell = floorTilemap.WorldToCell(candidate);
-
-        // Spiral search outward from player position to find nearest valid tile
-        int maxSearchRadius = Mathf.Max(bounds.size.x, bounds.size.y);
-        for (int searchRadius = 1; searchRadius < maxSearchRadius; searchRadius++)
+        int cellRadius = Mathf.CeilToInt(spawnRadius); // approximate radius in tile cells
+        for (int searchRadius = 1; searchRadius <= cellRadius; searchRadius++)
         {
             for (int x = -searchRadius; x <= searchRadius; x++)
             {
@@ -164,17 +177,24 @@ public class EnemySpawning : MonoBehaviour
                     if (Mathf.Abs(x) == searchRadius || Mathf.Abs(y) == searchRadius)
                     {
                         Vector3Int checkCell = startCell + new Vector3Int(x, y, 0);
-                        if (floorTilemap.HasTile(checkCell))
+                        if (floorTilemap.HasTile(checkCell) && !wallTilemap.HasTile(checkCell))
                         {
-                            return floorTilemap.GetCellCenterWorld(checkCell);
+                            Vector3 center = floorTilemap.GetCellCenterWorld(checkCell);
+                            // Ensure the cell center is within the spawnRadius from player
+                            if (Vector3.Distance(center, playerTransform.position) <= spawnRadius && !IsBlocked(center))
+                            {
+                                return center;
+                            }
                         }
                     }
                 }
             }
         }
 
-        // Fallback: return player position if no valid tile found
-        return playerTransform.position;
+        // Final fallback: pick a point exactly on the spawn circle to avoid player overlap
+        float fallbackAngle = Random.Range(0f, Mathf.PI * 2f);
+        Vector3 finalPos = playerTransform.position + new Vector3(Mathf.Cos(fallbackAngle), Mathf.Sin(fallbackAngle), 0f) * spawnRadius;
+        return finalPos;
     }
 
     // Check if the candidate position overlaps any obstacle

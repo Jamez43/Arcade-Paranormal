@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   baseStats: {fileID: 11400000, guid: 7da4c97f0d76140d784c913dd4a36fef, type: 2}
   upgradesMenuContainer: {fileID: 0}
-  levelUpXPThreshold: 5
+  levelUpXPThreshold: 25
 --- !u!114 &7399020701295790572
 MonoBehaviour:
   m_ObjectHideFlags: 0
