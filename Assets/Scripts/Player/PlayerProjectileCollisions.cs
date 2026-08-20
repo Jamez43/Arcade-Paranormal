@@ -10,7 +10,7 @@ public class PlayerProjectileCollisions : MonoBehaviour
     {
         // Get runtime stats from PlayerController
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Stats;
-        projectileWeaponController = FindFirstObjectByType<ProjectileWeaponController>();
+        projectileWeaponController = FindAnyObjectByType<ProjectileWeaponController>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

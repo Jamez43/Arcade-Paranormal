@@ -6,11 +6,13 @@ public class XP_Pickup : MonoBehaviour
     [SerializeField] private XPController xpController;
 
     private PlayerRuntimeStats playerStats;
+    private PlayerController playerController;
 
     private void Start()
     {
         // Get runtime stats from PlayerController (use Start to ensure PlayerController.Awake has run)
-        playerStats = GetComponent<PlayerController>().Stats;
+        playerController = GetComponent<PlayerController>();
+        playerStats = playerController.Stats;
         pickupCollider.radius = playerStats.PickupRange;
     }
 
@@ -28,10 +30,9 @@ public class XP_Pickup : MonoBehaviour
 
     private void GrantXP(float amount)
     {
-        PlayerController player = FindFirstObjectByType<PlayerController>();
-        if (player != null)
+        if (playerController != null)
         {
-            player.AddXP(amount);
+            playerController.AddXP(amount);
         }
     }
 }

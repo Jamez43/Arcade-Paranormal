@@ -7,7 +7,7 @@ public class RestartButton : MonoBehaviour
 
     private void Start()
     {
-        playerController = FindFirstObjectByType<PlayerController>();
+        playerController = FindAnyObjectByType<PlayerController>();
     }
 
     public void RestartLevel()

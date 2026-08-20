@@ -23,7 +23,7 @@ public class MeleeWeaponController : MonoBehaviour
         {
             center = indicator.transform.parent; // usually the player
         }
-        cooldownBar = FindFirstObjectByType<CooldownBar>();
+        cooldownBar = FindAnyObjectByType<CooldownBar>();
         cooldownBar.UpdateCooldownBar(playerStats.Cooldown, playerStats.Cooldown);
     }
 

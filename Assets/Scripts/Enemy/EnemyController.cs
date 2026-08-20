@@ -6,12 +6,14 @@ public class EnemyController : MonoBehaviour
     private HealthBar healthBar;
     private Collider2D enemyCollider;
     private XPController XPController;
+    private EnemySpawning enemySpawning;
 
     private void Awake()
     {
         healthBar = GetComponentInChildren<HealthBar>(includeInactive: true);
         enemyCollider = GetComponent<Collider2D>();
-        XPController = FindFirstObjectByType<XPController>();
+        XPController = FindAnyObjectByType<XPController>();
+        enemySpawning = FindAnyObjectByType<EnemySpawning>();
     }
     private void OnEnable()
     {
@@ -47,7 +49,7 @@ public class EnemyController : MonoBehaviour
         {
             gameObject.SetActive(false);
 
-            EnemySpawning enemySpawning = FindFirstObjectByType<EnemySpawning>();
+            enemySpawning ??= FindAnyObjectByType<EnemySpawning>();
             if (enemySpawning != null)
             {
                 if (!enemySpawning.disabledEnemies.Contains(gameObject))
