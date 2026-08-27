@@ -1,12 +1,25 @@
+using System;
 using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
+    public static event Action<EnemyController> EnemyKilled;
+    public static int ActiveEnemyCount { get; private set; }
+
     [SerializeField] public EnemyStats stats;
     public float currentHealth { get; private set; }
     private HealthBar healthBar;
     private Collider2D enemyCollider;
     private XPController XPController;
     private EnemySpawning enemySpawning;
+    private bool isCountedAsActive;
+    private bool deathReported;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    private static void ResetStatics()
+    {
+        EnemyKilled = null;
+        ActiveEnemyCount = 0;
+    }
 
     private void Awake()
     {
@@ -18,6 +31,12 @@ public class EnemyController : MonoBehaviour
     private void OnEnable()
     {
         currentHealth = stats.MaxHealth;
+        deathReported = false;
+        if (!isCountedAsActive)
+        {
+            ActiveEnemyCount++;
+            isCountedAsActive = true;
+        }
         enemyCollider.enabled = true;
         healthBar.gameObject.SetActive(false);
     }
@@ -35,6 +54,11 @@ public class EnemyController : MonoBehaviour
 
     private void OnDisable()
     {
+        if (isCountedAsActive)
+        {
+            ActiveEnemyCount = Mathf.Max(0, ActiveEnemyCount - 1);
+            isCountedAsActive = false;
+        }
         enemyCollider.enabled = false;
     }
 
@@ -45,17 +69,16 @@ public class EnemyController : MonoBehaviour
 
     private void CheckDie()
     {
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !deathReported)
         {
+            deathReported = true;
             gameObject.SetActive(false);
+            EnemyKilled?.Invoke(this);
 
             enemySpawning ??= FindAnyObjectByType<EnemySpawning>();
             if (enemySpawning != null)
             {
-                if (!enemySpawning.disabledEnemies.Contains(gameObject))
-                {
-                    enemySpawning.disabledEnemies.Add(gameObject);
-                }
+                enemySpawning.ReturnToPool(gameObject);
             }
 
             if (XPController.disabledXP.Count == 0)

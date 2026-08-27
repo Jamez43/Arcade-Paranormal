@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
@@ -20,15 +21,21 @@ public class PlayerController : MonoBehaviour
     private GameObject coolDownBarCanvas;
     private GameObject xpCanvas;
     private float currentHealth;
+    private bool deathReported;
 
     // Public property to access runtime stats from other scripts
     public PlayerRuntimeStats Stats => runtimeStats;
+    public float CurrentHealth => Mathf.Max(0f, currentHealth);
+    public float HealthPercent => Mathf.Clamp01(CurrentHealth / runtimeStats.MaxHealth);
+    public event Action<float> DamageTaken;
+    public event Action Died;
 
     private void Awake()
     {
         // Initialize runtime stats from base stats
         runtimeStats = new PlayerRuntimeStats(baseStats);
         currentHealth = runtimeStats.MaxHealth;
+        deathReported = false;
 
         healthBar = GetComponentInChildren<HealthBar>(includeInactive: true);
         healthBar.UpdateHealthBar(currentHealth, runtimeStats.MaxHealth);
@@ -67,14 +74,18 @@ public class PlayerController : MonoBehaviour
         float damageAfterDefense = damageAmount * (1 - runtimeStats.Defense);
         if (damageAfterDefense > 0)
         {
-            currentHealth -= damageAfterDefense;
+            float appliedDamage = Mathf.Min(CurrentHealth, damageAfterDefense);
+            currentHealth = Mathf.Max(0f, currentHealth - damageAfterDefense);
             healthBar.gameObject.SetActive(true);
             healthBar.UpdateHealthBar(currentHealth, runtimeStats.MaxHealth);
+            DamageTaken?.Invoke(appliedDamage);
         }
     }
 
     public void AddXP(float amount)
     {
+        currentHealth = Mathf.Min(runtimeStats.MaxHealth, currentHealth + amount / 2f);
+        healthBar.UpdateHealthBar(currentHealth, runtimeStats.MaxHealth);
         currentXP += amount;
         xpBar.UpdateXPBar(currentXP, levelUpXPThreshold);
         if (currentXP >= levelUpXPThreshold)
@@ -96,7 +107,7 @@ public class PlayerController : MonoBehaviour
     private void NewUpgradesWindow()
     {
         List<string> selectedUpgradesName = upgradesNames
-        .OrderBy(x => Random.value)
+        .OrderBy(x => UnityEngine.Random.value)
         .Take(3)
         .ToList();
 
@@ -125,8 +136,10 @@ public class PlayerController : MonoBehaviour
 
     private void CheckDie()
     {
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !deathReported)
         {
+            deathReported = true;
+            Died?.Invoke();
             gameOverMenu.SetActive(true);
             healthBar.gameObject.SetActive(false);
             coolDownBarCanvas.SetActive(false);

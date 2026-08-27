@@ -18,4 +18,5 @@ public class EnemyStats_ArcadeCabinet : EnemyStats
     public float ProjectileSpeed => projectileSpeed;
     public override float Defense => defense;
     public override int Cost => cost;
+    public override bool IsRanged => true;
 }

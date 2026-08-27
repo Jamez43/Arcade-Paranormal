@@ -16,4 +16,5 @@ public class EnemyStats_Joystick : EnemyStats
     public override float AttackDelay => attackDelay;
     public override float Defense => defense;
     public override int Cost => cost;
+    public override bool IsRanged => false;
 }
