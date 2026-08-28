@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class JoystickReposition : MonoBehaviour
 {
     private RectTransform outerJoystick;
+    private CanvasGroup canvasGroup;
     [SerializeField] private InputActionReference pointerActionRef;
     [SerializeField] private InputActionReference pressActionRef;
 
@@ -17,13 +18,21 @@ public class JoystickReposition : MonoBehaviour
 
         pressActionRef.action.performed += OnPress;
         pressActionRef.action.canceled += OnRelease;
+
+        SetJoystickVisible(false);
     }
 
     private void Awake()
     {
         outerJoystick = GetComponent<RectTransform>();
+        canvasGroup = outerJoystick.parent.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = outerJoystick.parent.gameObject.AddComponent<CanvasGroup>();
+        }
 
         defaultPos = outerJoystick.anchoredPosition;
+        SetJoystickVisible(false);
     }
 
     private void OnDisable()
@@ -39,11 +48,13 @@ public class JoystickReposition : MonoBehaviour
     {
         Vector2 screenPos = pointerActionRef.action.ReadValue<Vector2>();
         MoveOuterToScreen(screenPos);
+        SetJoystickVisible(true);
     }
 
     void OnRelease(InputAction.CallbackContext _)
     {
         outerJoystick.anchoredPosition = defaultPos;
+        SetJoystickVisible(false);
     }
 
     private void MoveOuterToScreen(Vector2 screenPos)
@@ -53,5 +64,12 @@ public class JoystickReposition : MonoBehaviour
         {
             outerJoystick.anchoredPosition = local;
         }
+    }
+
+    private void SetJoystickVisible(bool isVisible)
+    {
+        if (canvasGroup == null) return;
+
+        canvasGroup.alpha = isVisible ? 1f : 0f;
     }
 }
