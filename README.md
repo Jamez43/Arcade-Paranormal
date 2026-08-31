@@ -4,6 +4,8 @@ Arcade Paranormal is a mobile 2D survival roguelite built in Unity. The player f
 
 > **Status:** MVP in active development. The core gameplay loop is playable; progression, content, animation, and release systems are still being developed.
 
+## [Play Now](https://jamez43.itch.io/arcade-paranormal)
+
 ## Core Gameplay Loop
 
 1. Move with a virtual joystick to evade enemies and collect XP.
