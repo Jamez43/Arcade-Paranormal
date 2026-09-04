@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class PocketProtectorButton : MonoBehaviour
 {
-    private GameObject parentPanel;
-
     public void updateDefense()
     {
         PlayerController player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -18,8 +16,6 @@ public class PocketProtectorButton : MonoBehaviour
         }
         Debug.Log("Defense increased to: " + player.Stats.Defense);
 
-        parentPanel = transform.parent.gameObject;
-        parentPanel.SetActive(false);
-        PauseManager.instance.UnPauseGame();
+        player.CompleteUpgradeSelection();
     }
 }

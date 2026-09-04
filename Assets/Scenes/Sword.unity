@@ -679,6 +679,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOverCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6804968366089680306, guid: 6dfe47514d2ce460b9080a39682421d1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8067760260259693580, guid: 6dfe47514d2ce460b9080a39682421d1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -6785,6 +6789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradesCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 201644246294055522, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 421253092072410926, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6823,6 +6831,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1846759963540496164, guid: aff13bf077d5946cc8a4ae80d89ccfa6, type: 3}

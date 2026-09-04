@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         healthBar.UpdateHealthBar(currentHealth, runtimeStats.MaxHealth);
         currentXP += amount;
         xpBar.UpdateXPBar(currentXP, levelUpXPThreshold);
-        if (currentXP >= levelUpXPThreshold)
+        if (currentXP >= levelUpXPThreshold && !PauseManager.instance.isPaused)
         {
             LevelUp();
         }
@@ -106,6 +106,8 @@ public class PlayerController : MonoBehaviour
 
     private void NewUpgradesWindow()
     {
+        HideAllUpgradeOptions();
+
         List<string> selectedUpgradesName = upgradesNames
         .OrderBy(x => UnityEngine.Random.value)
         .Take(3)
@@ -122,6 +124,24 @@ public class PlayerController : MonoBehaviour
             upgrade.SetActive(true);
         }
         upgradesMenuContainer.SetActive(true);
+    }
+
+    private void HideAllUpgradeOptions()
+    {
+        foreach (Transform child in upgradesMenuContainer.GetComponentsInChildren<Transform>(true))
+        {
+            if (upgradesNames.Contains(child.name))
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void CompleteUpgradeSelection()
+    {
+        HideAllUpgradeOptions();
+        upgradesMenuContainer.SetActive(false);
+        PauseManager.instance.UnPauseGame();
     }
 
 
